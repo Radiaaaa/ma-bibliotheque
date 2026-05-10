@@ -1981,15 +1981,15 @@ footer:hover {
   <p class="header-sub" id="site-subtitle">Pour ne plus oublier avant les suites 🌸</p>
   <div class="stats-bar">
     <div class="stat-item">
-      <span class="stat-num" id="stat-livres">0</span>
+      <span class="stat-num" id="stat-livres">1</span>
       <span class="stat-label">Livres</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num" id="stat-pages">0</span>
+      <span class="stat-num" id="stat-pages">319</span>
       <span class="stat-label">Pages lues</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num" id="stat-series">0</span>
+      <span class="stat-num" id="stat-series">1</span>
       <span class="stat-label">Séries</span>
     </div>
   </div>
@@ -2085,7 +2085,7 @@ footer:hover {
     <input type="hidden" id="saga-edit-id">
     <div class="modal-field">
       <label>Nom de la saga</label>
-      <input type="text" id="saga-edit-name" placeholder="ex : Hades &amp; Persephone">
+      <input type="text" id="saga-edit-name" placeholder="ex : Seasons of Carnage">
     </div>
     <div class="modal-field">
       <label>Auteur·ice</label>
@@ -2117,6 +2117,9 @@ footer:hover {
         <option value="Monster Romance">🐉 Monster Romance</option>
       </select>
     </div>
+    <!-- Champs supplémentaires pour Tourist Season (tome 1) -->
+    <div id="builtin-book-fields" style="display:none; border-top:1px solid var(--border); margin-top:16px; padding-top:16px;">
+      <div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;">📖 Tome 1 — Tourist Season</div>
       <div class="modal-field">
         <label>URL de la couverture du livre</label>
         <input type="text" id="saga-edit-book1-cover" placeholder="https://… (couverture du tome 1)">
@@ -2154,7 +2157,7 @@ footer:hover {
     <input type="hidden" id="edit-book-id">
     <div class="modal-field">
       <label>Titre du livre *</label>
-      <input type="text" id="edit-book-title" placeholder="ex : A Court of Thorns and Roses">
+      <input type="text" id="edit-book-title" placeholder="ex : Tourist Season">
     </div>
     <div class="modal-field">
       <label>Auteur·ice</label>
@@ -2162,7 +2165,7 @@ footer:hover {
     </div>
     <div class="modal-field">
       <label>Série</label>
-      <input type="text" id="edit-book-series" placeholder="ex : Hades &amp; Persephone">
+      <input type="text" id="edit-book-series" placeholder="ex : Seasons of Carnage">
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
       <div class="modal-field">
@@ -2286,15 +2289,15 @@ footer:hover {
     <div class="accueil-section-title">Statistiques</div>
     <div class="accueil-stats">
       <div class="accueil-stat-card">
-        <span class="accueil-stat-num" id="home-stat-livres">0</span>
+        <span class="accueil-stat-num" id="home-stat-livres">1</span>
         <span class="accueil-stat-label">Livres lus</span>
       </div>
       <div class="accueil-stat-card">
-        <span class="accueil-stat-num" id="home-stat-pages">0</span>
+        <span class="accueil-stat-num" id="home-stat-pages">319</span>
         <span class="accueil-stat-label">Pages lues</span>
       </div>
       <div class="accueil-stat-card">
-        <span class="accueil-stat-num" id="home-stat-series">0</span>
+        <span class="accueil-stat-num" id="home-stat-series">1</span>
         <span class="accueil-stat-label">Séries suivies</span>
       </div>
     </div>
@@ -2318,7 +2321,15 @@ footer:hover {
       </div>
     </div>
     <div class="cover-cards-grid" id="home-covers-grid">
-    </div>
+      <!-- Carte built-in Tourist Season : masquée, injectée via renderHomeCovers -->
+      <div class="cover-card" id="home-card-ts1-static" onclick="showSection('seasons-of-carnage', null)" style="display:none;">
+        <div class="cover-card-placeholder" id="home-cover-ts1">📖</div>
+        <div class="cover-card-info">
+          <div class="cover-card-title">Tourist Season</div>
+          <div class="cover-card-author">Brynne Weaver</div>
+          <span class="cover-card-badge">🩸 Dark Romance</span>
+        </div>
+      </div>
     </div>
   </div>
   </div><!-- fin home-blocks-container -->
@@ -2334,6 +2345,7 @@ footer:hover {
     </div>
   </div>
   <div class="cover-cards-grid" id="all-series-grid">
+    <!-- Carte Seasons of Carnage : injectée dynamiquement par renderAllSeries -->
   </div>
 </div>
 <!-- FIN ALL SERIES -->
@@ -2342,7 +2354,222 @@ footer:hover {
   <div id="library-root"></div>
 </div>
 <!-- FIN BIBLIOTHÈQUE -->
-
+<!-- ===== SEASONS OF CARNAGE (BUILT-IN) ===== -->
+<div id="seasons-of-carnage" class="section">
+  <div class="series-header" id="series-header-seasons-of-carnage">
+    <div class="series-badge-fallback" style="background: var(--peach-light);">SC</div>
+    <div class="series-info">
+      <h2 id="saga-title-seasons-of-carnage">Seasons of Carnage</h2>
+      <div class="series-author" id="saga-author-seasons-of-carnage">Brynne Weaver</div>
+      <div class="series-meta" id="saga-desc-seasons-of-carnage">
+        <span class="series-genre-badge" style="background:var(--peach-light);border:1px solid var(--peach);color:#8a4020;">🩸 Dark Romance</span>
+        <span class="series-genre-badge" style="background:#e8f0d8;border:1px solid #b0cc80;color:#405820;">🔪 Thriller</span>
+        Trilogie · Cape Carnage, Maine
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-left:auto;flex-shrink:0;">
+      <button class="series-fav-btn" id="fav-btn-seasons-of-carnage" onclick="toggleFavSaga('seasons-of-carnage')" title="Saga favorite">☆</button>
+      <button class="gear-btn series-gear-btn" onclick="openSagaEdit('seasons-of-carnage')" title="Modifier la saga">⚙️</button>
+    </div>
+  </div>
+  <!-- TOME 1 -->
+  <div class="book-card open" id="card-ts1">
+    <div class="book-card-header" onclick="toggleCard('card-ts1')">
+      <div class="cover-thumb-placeholder" id="thumb-ts1" style="background:var(--peach-light);">📖</div>
+      <div class="book-title-area">
+        <span class="tome-badge">Tome 1</span>
+        <h3>Tourist Season</h3>
+      </div>
+      <div class="book-card-right">
+        <span class="badge badge-pages">📄 319 pages</span>
+        <span class="badge badge-spoiler">⚠ Spoilers</span>
+      </div>
+      <span class="toggle-icon">▾</span>
+    </div>
+    <div class="book-content">
+      <!-- TROPES -->
+      <div class="subsection open" id="sub-ts1-tropes">
+        <div class="subsection-header" onclick="toggleSubsection('sub-ts1-tropes')">
+          <span class="subsection-title">✨ Tropes</span>
+          <span class="subsection-arrow">▾</span>
+        </div>
+        <div class="subsection-body">
+          <div class="tropes-list">
+            <span class="trope-tag trope-dr">Enemies-to-lovers</span>
+            <span class="trope-tag trope-dr">Tueurs en série</span>
+            <span class="trope-tag trope-dr">Morally grey</span>
+            <span class="trope-tag trope-rom">Forced proximity</span>
+            <span class="trope-tag trope-rom">Reluctant allies</span>
+            <span class="trope-tag trope-thr">Dark comedy</span>
+            <span class="trope-tag trope-gen">Slow burn</span>
+            <span class="trope-tag trope-dr">Brat / brat tamer</span>
+          </div>
+        </div>
+      </div>
+      <!-- PERSONNAGES -->
+      <div class="subsection" id="sub-ts1-perso">
+        <div class="subsection-header" onclick="toggleSubsection('sub-ts1-perso')">
+          <span class="subsection-title">👥 Personnages</span>
+          <span class="subsection-arrow">▾</span>
+        </div>
+        <div class="subsection-body">
+          <div class="characters-grid">
+            <div class="character-card">
+              <div class="character-name">Harper Starling</div>
+              <div class="character-alias">Vraie identité : Autumn Bower</div>
+              <div class="character-desc">Jardinière à Lancaster Manor. Tueuse en série qui élimine les mauvais touristes avec son broyeur Cookie Monster. Son corbeau s'appelle Morpheus. Survivante du tueur Harvey Mead. A volé l'identité d'une vraie Harper Starling morte.</div>
+              <span class="character-tag tag-pov">POV Principal</span>
+            </div>
+            <div class="character-card">
+              <div class="character-name">Nolan Rhodes</div>
+              <div class="character-alias">Alias : Ballmeat Guy</div>
+              <div class="character-desc">SAR au Tennessee. Tueur en série. Venu tuer Harper, croyant qu'elle est la conductrice qui a tué son frère Billy. Garde un scrapbook avec des trophées de peau. Cicatrice au coude, plaque en titane. Tatouage ouroboros.</div>
+              <span class="character-tag tag-pov">POV Principal</span>
+            </div>
+            <div class="character-card">
+              <div class="character-name">Arthur Lancaster</div>
+              <div class="character-alias">Le vrai La Plume ?</div>
+              <div class="character-desc">Octogénaire richissime, Alzheimer's modéré. Meilleur ami d'Harper. Canne en chêne rouge, tête de loup en bronze. Amoureux d'Irene. Sa fille Poppy a été tuée à la cottage. ATTENTION : il n'est probablement PAS La Plume.</div>
+              <span class="character-tag tag-ally">Allié clé</span>
+            </div>
+            <div class="character-card">
+              <div class="character-name">Shérif Yates</div>
+              <div class="character-alias">La Plume — Le vrai antagoniste</div>
+              <div class="character-desc">Révélé dans l'épilogue comme étant La Plume. Il a tué Poppy Lancaster. Laisse les soupçons sur Arthur. Tue Vinny Meschino à la fin. Connaît la vraie identité d'Harper (Autumn Bower). Les appelle "ses jouets".</div>
+              <span class="character-tag tag-twist">⚡ Twist final</span>
+            </div>
+            <div class="character-card">
+              <div class="character-name">Lukas Lancaster</div>
+              <div class="character-alias"></div>
+              <div class="character-desc">Petit-fils d'Arthur, trentaine. Restaure la distillerie Lancaster. Cœur pur, ignore tout des activités meurtrières. Traumatisé par le départ de Maxine. Harper lui confie le sac de Nolan puis lui demande de le détruire.</div>
+              <span class="character-tag tag-ally">Allié innocent</span>
+            </div>
+            <div class="character-card">
+              <div class="character-name">Sam Porter</div>
+              <div class="character-alias">Porter Productions / Sleuthseekers</div>
+              <div class="character-desc">Documentariste, fondateur des Sleuthseekers. Convaincu qu'Arthur est La Plume. Kidnappe Nolan pour l'interviewer. Sait qu'Harper est Autumn Bower. Fait chanter Nolan.</div>
+              <span class="character-tag tag-dead">Mort — chute distillerie</span>
+            </div>
+            <div class="character-card">
+              <div class="character-name">Maya</div>
+              <div class="character-alias">Maya's Magical Mixtures</div>
+              <div class="character-desc">Chimiste (PhD MIT), amie d'Harper. Vend du faux sang comestible (à base de psilocybine), insectifuge "Bugfucker", stain remover. Sait qu'il se passe des choses étranges mais ne pose pas de questions.</div>
+              <span class="character-tag tag-ally">Alliée</span>
+            </div>
+            <div class="character-card">
+              <div class="character-name">Billy Rhodes</div>
+              <div class="character-alias">William Emerson Rhodes</div>
+              <div class="character-desc">Frère de Nolan, tué lors du hit-and-run à Calvert Cliffs. Rêvait d'être pâtissier. Sa mort est le moteur de toute la vengeance de Nolan. La vraie Harper Starling conduisait — pas Autumn.</div>
+              <span class="character-tag tag-dead">Mort (avant l'histoire)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- RÉSUMÉ -->
+      <div class="subsection open" id="sub-ts1-resume">
+        <div class="subsection-header" onclick="toggleSubsection('sub-ts1-resume')">
+          <span class="subsection-title">📖 Résumé complet</span>
+          <span class="subsection-arrow">▾</span>
+        </div>
+        <div class="subsection-body">
+          <div class="resume-text">
+            <p>Harper Starling (en réalité <strong>Autumn Bower</strong>) vit depuis 4 ans à Cape Carnage sous une identité volée. Elle est jardinière à Lancaster Manor, protège la ville en éliminant les touristes problématiques avec son broyeur Cookie Monster, et s'occupe d'Arthur Lancaster, vieil homme atteint d'Alzheimer's qu'elle aime comme un père.</p>
+            <p><strong>Nolan Rhodes</strong> débarque à Cape Carnage avec une seule mission : tuer Harper. Il la croit responsable du hit-and-run qui a tué son frère Billy. Après des années de vengeance (il a déjà tué les trois autres passagers), Harper est son trophée final.</p>
+            <p>Dès leur première rencontre, une attraction incontrôlable s'installe. Harper vole son sac de meurtre et son scrapbook, forçant une alliance : elle l'aide à récupérer ses affaires s'il l'aide à gérer <strong>Sam Porter</strong>, documentariste des Sleuthseekers qui tente de prouver qu'Arthur est La Plume.</p>
+            <p>Leur deal inclut d'<strong>exhumer 16 corps</strong> enterrés par Arthur sur un terrain vendu à un promoteur, en 3 semaines. Chaque nuit à creuser ensemble les rapproche. Harper manque de se noyer lors de la course en boîte à savon (freins sabotés). Nolan la sauve en pratiquant la RCP. Sam kidnappe Nolan à la distillerie — Harper les sauve, Sam meurt dans une chute. Yates arrive et tue Vinny, révélant dans l'épilogue qu'il est La Plume.</p>
+          </div>
+        </div>
+      </div>
+      <!-- DYNAMIQUES -->
+      <div class="subsection" id="sub-ts1-dynamic">
+        <div class="subsection-header" onclick="toggleSubsection('sub-ts1-dynamic')">
+          <span class="subsection-title">💕 Dynamiques & Romance</span>
+          <span class="subsection-arrow">▾</span>
+        </div>
+        <div class="subsection-body">
+          <div class="dynamic-box">
+            <div class="dynamic-label">Nolan × Harper — Ennemis à amants</div>
+            <div class="dynamic-desc">Enemies-to-lovers sur fond de meurtre et vengeance. Il est venu la tuer, elle lui vole ses armes. Deal de survie mutuelle. Attraction immédiate malgré la haine. Premier sexe lors du trip aux champignons (rough, consensuel). Nolan réalise à la fin qu'il l'aime — et qu'elle n'est pas la bonne Harper.</div>
+          </div>
+          <div class="dynamic-box">
+            <div class="dynamic-label">Harper × Arthur — Père/Fille de substitution</div>
+            <div class="dynamic-desc">Arthur l'appelle parfois "Poppy" pendant ses épisodes. Harper pleure quand il lui dit qu'il est "reconnaissant qu'elle soit là". Relation pivot de l'histoire — Harper sacrifie tout pour lui.</div>
+          </div>
+          <div class="cw-box">
+            <strong>Contenu adulte :</strong> Brat/brat tamer, impact play, rough sex, couteau, rope bondage (shibari), chokehold, pain play. Consentement explicite présent à chaque scène.
+          </div>
+        </div>
+      </div>
+      <!-- TWISTS -->
+      <div class="subsection" id="sub-ts1-twists">
+        <div class="subsection-header" onclick="toggleSubsection('sub-ts1-twists')">
+          <span class="subsection-title">⚡ Twists & Révélations</span>
+          <span class="subsection-arrow">▾</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="twists-list">
+            <li><strong>Harper n'est pas Harper :</strong> Elle est Autumn Bower, influenceuse lifestyle qui a survécu au tueur Harvey Mead. Elle a volé l'identité de la vraie Harper Starling (morte dans le même accident qui a tué Billy).</li>
+            <li><strong>Nolan se trompe de cible :</strong> La vraie Harper Starling conduisait bien la voiture. Autumn était juste là au mauvais moment. Nolan découvre la vérité en identifiant le VIN du van naufragé.</li>
+            <li><strong>Yates est La Plume :</strong> Pas Arthur. Yates a tué Poppy Lancaster, laisse les soupçons sur Arthur depuis des décennies. Il connaît la vraie identité d'Autumn. Il les appelle "mes jouets".</li>
+            <li><strong>Arthur a joué Nolan :</strong> Il lui fait croire qu'Harper lui a dit de récupérer son "sac de médecin" (sac de meurtre). Nolan se fait avoir.</li>
+            <li><strong>Le van de Goonie :</strong> Le Chevy G20 d'Autumn et Adam repose au fond de la mer, visible uniquement aux grandes marées de printemps. Sam avait localisé sa position exacte.</li>
+          </ul>
+        </div>
+      </div>
+      <!-- À RETENIR -->
+      <div class="subsection" id="sub-ts1-remember">
+        <div class="subsection-header" onclick="toggleSubsection('sub-ts1-remember')">
+          <span class="subsection-title">📌 À retenir pour le Tome 2</span>
+          <span class="subsection-arrow">▾</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="remember-list">
+            <li><strong>Nolan sait qu'Harper est Autumn Bower</strong> — il ne lui a pas encore dit</li>
+            <li><strong>Yates est La Plume</strong>, les Sleuthseekers débarquent à Cape Carnage pour "la guerre"</li>
+            <li><strong>Sam et Vinny sont morts</strong> — les Sleuthseekers vont enquêter</li>
+            <li><strong>Arthur est de plus en plus hors de contrôle</strong> avec sa maladie</li>
+            <li><strong>Lukas a promis de détruire le sac de Nolan</strong> mais est à Chicago</li>
+            <li><strong>Harper n'a toujours pas dit à Nolan qui elle est vraiment</strong></li>
+            <li><strong>Le van de Goonie</strong> est localisé — Sam avait les coordonnées exactes</li>
+            <li><strong>Les jardins d'Harper</strong> contiennent encore des restes osseux</li>
+            <li><strong>La distillerie</strong> rouvre bientôt — scène de crime à gérer</li>
+            <li>Nolan a dit <strong>"tu es à moi"</strong> — mais les promesses tiennent-elles face à la vérité ?</li>
+          </ul>
+        </div>
+      </div>
+      <!-- FRISE CHRONOLOGIQUE Tourist Season -->
+      <div class="subsection" id="sub-ts1-timeline">
+        <div class="subsection-header" onclick="toggleSubsection('sub-ts1-timeline')">
+          <span class="subsection-title">⏳ Frise chronologique</span>
+          <span class="subsection-arrow">▾</span>
+        </div>
+        <div class="subsection-body">
+          <div class="timeline-wrap">
+            <div class="timeline-item"><div class="timeline-dot dot-default"></div><div class="timeline-card"><div class="timeline-card-header"><span class="timeline-chapter">Ch. 1</span><span class="timeline-title">Harper (Autumn) découvre Nolan dans son jardin</span><span class="timeline-type-badge tbadge-default">📍 Évènement</span></div><div class="timeline-desc">Nolan débarque à Cape Carnage avec l'intention de la tuer. Première confrontation.</div></div></div>
+            <div class="timeline-item"><div class="timeline-dot dot-default"></div><div class="timeline-card"><div class="timeline-card-header"><span class="timeline-chapter">Ch. 3</span><span class="timeline-title">Harper vole le sac de meurtre de Nolan</span><span class="timeline-type-badge tbadge-default">📍 Évènement</span></div><div class="timeline-desc">Elle y trouve son scrapbook de trophées et comprend qui il est vraiment.</div></div></div>
+            <div class="timeline-item"><div class="timeline-dot dot-romance"></div><div class="timeline-card"><div class="timeline-card-header"><span class="timeline-chapter">Ch. 6</span><span class="timeline-title">Le deal : alliance forcée</span><span class="timeline-type-badge tbadge-romance">💕 Romance</span></div><div class="timeline-desc">Harper et Nolan acceptent de coopérer — il l'aide avec Sam Porter, elle l'aide à récupérer ses affaires.</div></div></div>
+            <div class="timeline-item"><div class="timeline-dot dot-default"></div><div class="timeline-card"><div class="timeline-card-header"><span class="timeline-chapter">Ch. 9</span><span class="timeline-title">Début des exhumations nocturnes</span><span class="timeline-type-badge tbadge-default">📍 Évènement</span></div><div class="timeline-desc">16 corps enterrés par Arthur sur le terrain vendu à déterrer en 3 semaines. Les nuits ensemble les rapprochent.</div></div></div>
+            <div class="timeline-item"><div class="timeline-dot dot-romance"></div><div class="timeline-card"><div class="timeline-card-header"><span class="timeline-chapter">Ch. 14</span><span class="timeline-title">Trip aux champignons — première nuit ensemble</span><span class="timeline-type-badge tbadge-romance">💕 Romance</span></div></div></div>
+            <div class="timeline-item"><div class="timeline-dot dot-twist"></div><div class="timeline-card"><div class="timeline-card-header"><span class="timeline-chapter">Ch. 18</span><span class="timeline-title">Course en boîte à savon — freins sabotés</span><span class="timeline-type-badge tbadge-twist">⚡ Twist</span></div><div class="timeline-desc">Harper manque de se noyer. Nolan la sauve en pratiquant la RCP. Quelqu'un les surveille.</div></div></div>
+            <div class="timeline-item"><div class="timeline-dot dot-twist"></div><div class="timeline-card"><div class="timeline-card-header"><span class="timeline-chapter">Ch. 21</span><span class="timeline-title">Sam kidnappe Nolan à la distillerie</span><span class="timeline-type-badge tbadge-twist">⚡ Twist</span></div><div class="timeline-desc">Harper intervient. Sam tombe et meurt dans la chute. Yates arrive immédiatement.</div></div></div>
+            <div class="timeline-item"><div class="timeline-dot dot-reveal"></div><div class="timeline-card"><div class="timeline-card-header"><span class="timeline-chapter">Épilogue</span><span class="timeline-title">Yates tue Vinny — révélé comme La Plume</span><span class="timeline-type-badge tbadge-reveal">🔍 Révélation</span></div><div class="timeline-desc">Le shérif Yates est La Plume. Il connaît la vraie identité d'Harper. "Mes jouets."</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+        <span style="color:var(--text-muted);font-size:12px;">Tourist Season · Tome 1</span>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-secondary" onclick="openShareModalBuiltin(event)" title="Partager une affiche">🖼️ Affiche</button>
+          <button class="btn-secondary" onclick="openEditBuiltinBook(event)">✏️ Modifier</button>
+          <button class="btn-danger" onclick="deleteBuiltinBook(event)">🗑 Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Les tomes suivants sont ajoutés via le formulaire "+ Ajouter" -->
+  <div id="builtin-extra-books"></div>
+</div>
+<!-- FIN SEASONS OF CARNAGE -->
 <!-- ===== AJOUTER ===== -->
 <div id="add-section" class="section">
   <div class="series-header">
@@ -3311,6 +3538,8 @@ function showSection(id, btn) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   const targetSection = document.getElementById(id);
   if (!targetSection) return;
+  // Si la section seasons-of-carnage est cachée car supprimée (book1hidden), ne pas la réafficher
+  if (targetSection.style.display === 'none' && id === 'seasons-of-carnage') return;
   if (targetSection.style.display === 'none') targetSection.style.display = '';
   targetSection.classList.add('visible');
   if (btn) btn.classList.add('active');
@@ -3509,6 +3738,20 @@ async function saveBook() {
 function makeSagaId(name) {
   return 'saga-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
+function updateBuiltinProgress() {
+  const meta = getSagaMeta('seasons-of-carnage');
+  const totalTomes = parseInt(meta.tomes) || 0;
+  if (totalTomes < 1) return;
+  // Count all book cards inside the section (built-in + injected)
+  const section = document.getElementById('seasons-of-carnage');
+  const readTomes = section ? [...section.querySelectorAll('.book-card')].filter(c => c.style.display !== 'none').length : 1;
+  // Remove existing badge if any
+  const descEl = document.getElementById('saga-desc-seasons-of-carnage');
+  if (!descEl) return;
+  const existing = descEl.querySelector('.tomes-progress');
+  if (existing) existing.remove();
+  descEl.insertAdjacentHTML('beforeend', tomesProgressHtml(readTomes, totalTomes));
+}
 function tomesProgressHtml(read, total) {
   if (!total || total < 1) return '';
   const pct = Math.round((read / total) * 100);
@@ -3543,7 +3786,25 @@ function clearForm() {
   timelineRows = [];
   renderTimelineFormRows();
 }
-function resolveSectionId(sagaId) { return sagaId; }
+// ===== BUILT-IN SAGA ALIASES =====
+// Maps saga IDs (from makeSagaId) to built-in section IDs
+const BUILTIN_SAGAS = {
+  'saga-seasons-of-carnage': 'seasons-of-carnage',
+  'saga-seasons-of-carnage-': 'seasons-of-carnage',
+};
+// Also store the known built-in section names for fuzzy matching
+const BUILTIN_SECTION_NAMES = {
+  'seasons-of-carnage': ['seasons of carnage', 'season of carnage', 'seasons of carnage series'],
+};
+function isBuiltinSaga(sagaId) {
+  // Seasons of Carnage n'est plus traitée comme built-in dans le rendu dynamique
+  // => les livres ajoutés dedans ont leur propre section normale avec suppression etc.
+  return null;
+}
+// Resolve a sagaId to the actual DOM section id (handles builtin redirect)
+function resolveSectionId(sagaId) {
+  return isBuiltinSaga(sagaId) || sagaId;
+}
 // ===== RENDER DYNAMIC SAGAS =====
 function renderDynamicSagas(books) {
   // Group books by series (or title if no series)
@@ -3561,12 +3822,27 @@ function renderDynamicSagas(books) {
   const addSection = document.getElementById('add-section');
   // Remove previously rendered dynamic saga sections
   document.querySelectorAll('.dynamic-saga-section').forEach(el => el.remove());
+  // Clear previously injected books in built-in sagas
+  document.querySelectorAll('.builtin-injected-book').forEach(el => el.remove());
+  const builtinExtra = document.getElementById('builtin-extra-books');
+  if (builtinExtra) builtinExtra.innerHTML = '';
   // Remove dynamic nav buttons (not built-in ones)
   document.querySelectorAll('.nav-btn.dynamic-saga').forEach(el => el.remove());
   const nav = document.getElementById('main-nav');
   const addBtn = nav.querySelector('[data-section="add-section"]');
   Object.entries(groups).forEach(([sagaName, sagaBooks]) => {
     const sagaId = makeSagaId(sagaName);
+    const builtinId = isBuiltinSaga(sagaId);
+    if (builtinId) {
+      // Inject books into existing built-in section
+      const container = document.getElementById('builtin-extra-books') || document.getElementById(builtinId);
+      sagaBooks.forEach(book => {
+        const card = buildBookCard(book);
+        card.classList.add('builtin-injected-book');
+        container.appendChild(card);
+      });
+      return; // Don't create a new section
+    }
     // Create section
     const section = document.createElement('div');
     section.id = sagaId;
@@ -3744,6 +4020,7 @@ function buildBookCard(book) {
 function renderHomeCovers(books) {
   const grid = document.getElementById('home-covers-grid');
   grid.querySelectorAll('.cover-card.dynamic').forEach(c => c.remove());
+  // Tourist Season exclu de la grille d'accueil (fiche résumé conservée)
   const recent = [...books].reverse().slice(0, 5);
   recent.forEach(book => {
     const genreConf = GENRE_COLORS[book.genre] || GENRE_COLORS['Romance'];
@@ -3791,6 +4068,7 @@ async function deleteBook(id, e) {
 }
 // ===== STATS =====
 function updateStats(books) {
+  // Tourist Season exclu des stats (non compté dans livres/pages)
   const allBooks = [...books];
   const totalPages = allBooks.reduce((s, b) => s + (parseInt(b.pages) || 0), 0);
   const series = new Set(allBooks.map(b => b.series || b.title));
@@ -3832,6 +4110,7 @@ function renderFavSagas(books) {
   if (!favs.length) { if (block) block.style.display = 'none'; return; }
   if (block) block.style.display = '';
   const allSagaSections = [];
+  // Seasons of Carnage exclu des favoris affichés
   document.querySelectorAll('.dynamic-saga-section').forEach(el => {
     const sagaId = el.id;
     const sagaName = el.getAttribute('data-saga-name') || sagaId;
@@ -3877,8 +4156,18 @@ function openSagaEdit(sagaId) {
   document.querySelectorAll('input[name="saga-status"]').forEach(r => {
     r.checked = r.value === statusVal;
   });
+  // Show built-in fields only for Tourist Season
   const builtinFields = document.getElementById('builtin-book-fields');
-  if (builtinFields) builtinFields.style.display = 'none';
+  if (sagaId === 'seasons-of-carnage') {
+    builtinFields.style.display = 'block';
+    // Load saved values
+    const thumbEl = document.getElementById('thumb-ts1');
+    const pagesEl = document.querySelector('#card-ts1 .badge-pages');
+    document.getElementById('saga-edit-book1-cover').value = meta.book1cover || '';
+    document.getElementById('saga-edit-book1-pages').value = meta.book1pages || (pagesEl ? pagesEl.textContent.replace(/[^0-9]/g,'') : '319');
+  } else {
+    builtinFields.style.display = 'none';
+  }
   modal.classList.add('open');
 }
 function closeSagaEdit() {
@@ -3898,6 +4187,31 @@ function saveSagaEdit() {
   const statusRadio = document.querySelector('input[name="saga-status"]:checked');
   const status = statusRadio ? statusRadio.value : '';
   const meta = { name, author, cover, tomes, desc, genre, status };
+  // Handle built-in Tourist Season book fields
+  if (sagaId === 'seasons-of-carnage') {
+    const book1cover = document.getElementById('saga-edit-book1-cover').value.trim();
+    const book1pages = document.getElementById('saga-edit-book1-pages').value.trim();
+    meta.book1cover = book1cover;
+    meta.book1pages = book1pages;
+    meta.book1hidden = false; // Restaurer si on modifie après suppression
+    // Update cover thumbnail
+    const thumbWrap = document.getElementById('thumb-ts1');
+    if (thumbWrap && book1cover) {
+      thumbWrap.outerHTML = `<img class="cover-thumb" id="thumb-ts1" src="${book1cover}" alt="Tourist Season">`;
+    }
+    // Update home cover card placeholder
+    const homeCover = document.getElementById('home-cover-ts1');
+    if (homeCover && book1cover) {
+      homeCover.outerHTML = `<img class="cover-card-img" id="home-cover-ts1" src="${book1cover}" alt="Tourist Season">`;
+    }
+    // Update pages badge
+    if (book1pages) {
+      const pagesEl = document.querySelector('#card-ts1 .badge-pages');
+      if (pagesEl) pagesEl.textContent = `📄 ${book1pages} pages`;
+    }
+    // Recalculate total stats
+    updateStats(sessionBooks);
+  }
   saveSagaMeta(sagaId, meta);
   // Update displayed elements
   const titleEl = document.getElementById('saga-title-' + sagaId);
@@ -3924,6 +4238,15 @@ function saveSagaEdit() {
         imgEl.replaceWith(newImg);
       }
     }
+  }
+  if (sagaId === 'seasons-of-carnage') {
+    updateBuiltinProgress();
+    // Rafraîchir les cartes accueil/séries avec la nouvelle couverture
+    const cardTs1 = document.getElementById('card-ts1');
+    if (cardTs1) cardTs1.style.display = '';
+    renderHomeCovers(sessionBooks || []);
+    renderAllSeries(sessionBooks || []);
+    updateStats(sessionBooks || []);
   }
   closeSagaEdit();
   showToast('✦ Saga mise à jour !');
@@ -4033,6 +4356,8 @@ function filterNavSagas(q) {
 }
 function collectAllSagas() {
   const sagas = [];
+  // Built-in (seulement si pas supprimé)
+  // Seasons of Carnage exclu de la navigation (fiche résumé conservée en interne)
   // Dynamic
   document.querySelectorAll('.dynamic-saga-section').forEach(el => {
     const sagaId = el.id;
@@ -4368,6 +4693,46 @@ async function init() {
       updateStats(books);
     }
   } catch(e) {}
+
+  // Setup built-in Tourist Season fav
+  const favs = getFavSagas();
+  const favBtnBuiltIn = document.getElementById('fav-btn-seasons-of-carnage');
+  if (favBtnBuiltIn && favs.includes('seasons-of-carnage')) {
+    favBtnBuiltIn.textContent = '★';
+    favBtnBuiltIn.classList.add('active');
+  }
+  renderFavSagas(sessionBooks);
+  // Built-in saga meta (allows renaming Tourist Season etc.)
+  const builtInMeta = getSagaMeta('seasons-of-carnage');
+  if (builtInMeta.name) document.getElementById('saga-title-seasons-of-carnage') && (document.getElementById('saga-title-seasons-of-carnage').textContent = builtInMeta.name);
+  if (builtInMeta.name) {
+    const nb = document.querySelector('[data-section="seasons-of-carnage"]');
+    if (nb) nb.textContent = builtInMeta.name;
+  }
+  // Tourist Season : visible uniquement pour la propriétaire du site
+  const OWNER_UID = '5vOPiOhBmSSMrLlTpRIsSPAu4RX2';
+  const isOwner = currentUser && currentUser.uid === OWNER_UID;
+  const sectionTs = document.getElementById('seasons-of-carnage');
+  const cardTs1 = document.getElementById('card-ts1');
+  const tsNavBtn = document.querySelector('[data-section="seasons-of-carnage"]');
+  const homeCardTs1 = document.getElementById('home-card-ts1-static');
+  if (!isOwner) {
+    // Pas la propriétaire → cacher complètement Tourist Season
+    if (sectionTs) sectionTs.style.display = 'none';
+    if (cardTs1) cardTs1.style.display = 'none';
+    if (tsNavBtn) tsNavBtn.style.display = 'none';
+    if (homeCardTs1) homeCardTs1.style.display = 'none';
+  } else {
+    // Propriétaire → comportement normal built-in
+    if (sectionTs) sectionTs.style.display = '';
+    if (cardTs1) cardTs1.style.display = 'none';
+    if (tsNavBtn) tsNavBtn.style.display = 'none';
+  }
+  // Inject tomes progress badge into built-in saga header
+  updateBuiltinProgress();
+  // Restore status badge for built-in saga
+  const builtInStatus = getSagaMeta('seasons-of-carnage').status || '';
+  updateSagaStatusBadge('seasons-of-carnage', builtInStatus);
   // Handle manual cover URL input
   document.getElementById('new-cover-url').addEventListener('change', function() {
     const url = this.value.trim();
@@ -4890,8 +5255,9 @@ function renderAllSeries(books) {
   if (!grid) return;
   // Remove previously added dynamic cards
   grid.querySelectorAll('.series-card-dynamic').forEach(c => c.remove());
+  // Seasons of Carnage exclu de la grille des séries (fiche résumé conservée)
   // Gather all dynamic series from books
-  const seen = new Set();
+  const seen = new Set(['seasons-of-carnage']);
   const groups = {};
   books.forEach(b => {
     const key = b.series || b.title;
@@ -5026,6 +5392,7 @@ function stripEmoji(str) {
 }
 function getAllSagasForLib() {
   const list = [];
+  list.push({ id: 'seasons-of-carnage', name: 'Seasons of Carnage', author: 'Brynne Weaver' });
   document.querySelectorAll('.dynamic-saga-section').forEach(el => {
     const sagaId = el.id;
     const name = el.getAttribute('data-saga-name') || sagaId;
@@ -5830,6 +6197,54 @@ async function downloadPoster() {
     status.textContent = '📋 Texte copié ! (Pour l\'image, fais une capture d\'écran de l\'aperçu ci-dessus)';
   }
 }
+// ===== EDIT / DELETE BUILT-IN TOURIST SEASON =====
+function openEditBuiltinBook(e) {
+  if (e) e.stopPropagation();
+  // Ouvre le modal de saga avec focus sur les champs du tome 1
+  openSagaEdit('seasons-of-carnage');
+}
+
+async function deleteBuiltinBook(e) {
+  if (e) e.stopPropagation();
+  if (!confirm('Supprimer Tourist Season de ta bibliothèque ?\nLes notes de la saga (couverture, pages…) seront effacées.')) return;
+
+  // Sauvegarder un flag "supprimé" dans les saga-meta du profil
+  const meta = getSagaMeta('seasons-of-carnage');
+  meta.book1hidden = true;
+  meta.book1cover = '';
+  meta.book1pages = '';
+  await saveSagaMeta('seasons-of-carnage', meta);
+
+  // Masquer la card du livre et le bouton nav (pas la section - elle reste accessible)
+  const card = document.getElementById('card-ts1');
+  if (card) card.style.display = 'none';
+  const tsNavBtn = document.querySelector('[data-section="seasons-of-carnage"]');
+  if (tsNavBtn) tsNavBtn.style.display = 'none';
+
+  // Rafraîchir les grilles (enlève la carte TS de l'accueil, allSeries, stats, favs)
+  renderHomeCovers(sessionBooks || []);
+  renderAllSeries(sessionBooks || []);
+  updateStats(sessionBooks || []);
+  renderFavSagas(sessionBooks || []);
+
+  showToast('🗑 Tourist Season supprimé de ta bibliothèque.');
+}
+
+function openShareModalBuiltin(e) {
+  if (e) e.stopPropagation();
+  const tsMeta = getSagaMeta('seasons-of-carnage');
+  const builtinBook = {
+    id: 'builtin-ts1',
+    title: 'Tourist Season',
+    author: 'Brynne Weaver',
+    genre: 'Dark Romance',
+    series: 'Seasons of Carnage',
+    tome: '1',
+    coverUrl: tsMeta.book1cover || '',
+    tropes: ['Enemies-to-lovers','Morally grey','Slow burn','Forced proximity','Brat / brat tamer'],
+    pages: tsMeta.book1pages || '319',
+  };
+  _sharePosterBook = builtinBook;
   _posterRating = 0;
   _posterStyle = 'rose';
   document.querySelectorAll('.poster-style-opt').forEach(el => el.classList.toggle('selected', el.dataset.style === 'rose'));
