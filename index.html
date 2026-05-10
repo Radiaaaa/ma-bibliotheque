@@ -1970,6 +1970,20 @@ footer:hover {
 </head>
 <body>
 <header>
+  <!-- Avatar profil en haut à gauche -->
+  <div id="header-profile-avatar" onclick="backToProfiles()" title="Changer de profil" style="
+    position:absolute;top:16px;left:16px;z-index:20;
+    width:44px;height:44px;border-radius:50%;overflow:hidden;
+    border:2.5px solid var(--pink);cursor:pointer;
+    box-shadow:var(--shadow);
+    background:var(--pink-light);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.4rem;
+    transition:transform 0.2s, box-shadow 0.2s;
+  " onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 4px 14px rgba(0,0,0,0.18)'"
+     onmouseout="this.style.transform='scale(1)';this.style.boxShadow='var(--shadow)'">
+    🌸
+  </div>
   <div class="header-icon-group">
     <button class="header-icon-btn lib-bounce-btn" id="lib-open-btn" onclick="showSection('bibliotheque', null)" title="Bibliothèque">📖</button>
     <button class="header-icon-btn darkmode-btn" id="darkmode-btn" onclick="toggleDarkMode()" title="Mode sombre">🌙</button>
@@ -3221,38 +3235,59 @@ async function selectProfile(uid) {
 }
 
 function addProfileBar(profile) {
+  // Plus de barre flottante en bas — l'avatar en haut à gauche remplace ce rôle
   const existing = document.getElementById('profile-bar');
   if (existing) existing.remove();
-  const bar = document.createElement('div');
-  bar.id = 'profile-bar';
-  bar.style.cssText = `
-    position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
-    background:${profile.color.deep};color:#fff;
-    border-radius:30px;padding:.5rem 1.2rem;
-    display:flex;align-items:center;gap:.8rem;
-    font-size:.85rem;z-index:9000;box-shadow:0 4px 16px rgba(0,0,0,.2);
-    font-family:Georgia,serif;
-  `;
-  const label = isReadOnly
-    ? `${profile.emoji} Bibliothèque de <b>${profile.name}</b> — lecture seule`
-    : `${profile.emoji} <b>Ta bibliothèque</b>`;
-  bar.innerHTML = `
-    <span>${label}</span>
-    <button onclick="backToProfiles()" style="
-      background:rgba(255,255,255,.2);border:none;color:#fff;
-      border-radius:20px;padding:.3rem .8rem;cursor:pointer;font-size:.8rem;
-    ">↩ Changer</button>
-  `;
-  document.body.appendChild(bar);
+
+  // Mettre à jour l'avatar dans le header
+  _refreshHeaderAvatarForProfile(profile);
+}
+
+async function _refreshHeaderAvatarForProfile(profile) {
+  const btn = document.getElementById('header-profile-avatar');
+  if (!btn) return;
+
+  // Bordure couleur du profil
+  btn.style.borderColor = profile.color.main;
+
+  // Tooltip
+  const tooltipLabel = isReadOnly ? `Bibliothèque de ${profile.name} — cliquer pour changer` : `Ta bibliothèque — cliquer pour changer`;
+  btn.title = tooltipLabel;
+
+  // Priorité : avatar custom > photo Google > emoji
+  try {
+    const snapAvatar = await fbDB.ref(`users/${profile.uid}/custom-avatar`).get();
+    if (snapAvatar.exists()) {
+      btn.innerHTML = `<img src="${snapAvatar.val()}" style="width:100%;height:100%;object-fit:cover;">`;
+      return;
+    }
+  } catch(e) {}
+
+  // Photo Google si c'est notre propre profil
+  if (currentUser && currentUser.uid === profile.uid && currentUser.photoURL) {
+    btn.innerHTML = `<img src="${currentUser.photoURL}" style="width:100%;height:100%;object-fit:cover;">`;
+    return;
+  }
+
+  // Fallback emoji
+  btn.innerHTML = profile.emoji;
+  btn.style.fontSize = '1.4rem';
 }
 
 function backToProfiles() {
   // Reset état
   viewingUid = null; isReadOnly = false;
   sessionBooks = [];
-  // Retirer la barre
+  // Retirer la barre si elle existe encore
   const bar = document.getElementById('profile-bar');
   if (bar) bar.remove();
+  // Reset avatar bouton
+  const btn = document.getElementById('header-profile-avatar');
+  if (btn) {
+    btn.innerHTML = '🌸';
+    btn.style.borderColor = 'var(--pink)';
+    btn.title = 'Changer de profil';
+  }
   // Réafficher le sélecteur
   buildProfileSelector(currentUser);
 }
@@ -3391,9 +3426,10 @@ async function getEffectiveAvatarUrl() {
 }
 
 
-// Mettre à jour l'avatar dans le header si nécessaire (extension future)
+// Mettre à jour l'avatar dans le header après sauvegarde des paramètres
 async function refreshHeaderAvatar() {
-  // Pas d'avatar dans le header pour l'instant — rien à faire
+  const profile = PROFILES.find(p => viewingUid && p.uid === viewingUid);
+  if (profile) await _refreshHeaderAvatarForProfile(profile);
 }
 
 // --- PSEUDO PERSONNALISÉ ---
