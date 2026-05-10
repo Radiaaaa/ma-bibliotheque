@@ -368,6 +368,13 @@ main {
   gap: 20px;
   margin-bottom: 48px;
 }
+/* Grille accueil : exactement 3 colonnes */
+#home-covers-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+#fav-sagas-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
 .cover-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -1377,6 +1384,7 @@ body.dark-mode .rte-toolbar { background: var(--bg3); }
   .book-card-header { flex-wrap: wrap; }
   .book-card-right { justify-content: flex-start; }
   .cover-cards-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  #home-covers-grid, #fav-sagas-grid { grid-template-columns: repeat(2, 1fr); }
 }
 /* =====================
    DARK MODE
@@ -4059,7 +4067,7 @@ function renderHomeCovers(books) {
   // Supprimer le bouton "voir tout" précédent
   const prevBtn = document.getElementById('home-see-all-btn');
   if (prevBtn) prevBtn.remove();
-  const recent = [...books].reverse().slice(0, 6);
+  const recent = [...books].reverse().slice(0, 3);
   recent.forEach(book => {
     const genreConf = GENRE_COLORS[book.genre] || GENRE_COLORS['Romance'];
     const sagaId = makeSagaId(book.series || book.title);
@@ -4079,8 +4087,8 @@ function renderHomeCovers(books) {
     `;
     grid.appendChild(card);
   });
-  // Bouton "voir tout" si plus de 6 livres
-  if (books.length > 6) {
+  // Bouton "voir tout" si plus de 3 livres
+  if (books.length > 3) {
     const btn = document.createElement('div');
     btn.id = 'home-see-all-btn';
     btn.className = 'cover-card dynamic';
