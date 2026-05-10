@@ -2321,6 +2321,28 @@ footer:hover {
 <!-- ===== ACCUEIL ===== -->
 <div id="accueil" class="section visible">
   <div id="home-blocks-container">
+  <!-- BLOC: DERNIERS RÉSUMÉS -->
+  <div class="home-block" id="hblock-recents" data-block="recents">
+    <div class="home-block-handle" title="Déplacer ce bloc">⠿</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+      <div class="accueil-section-title" style="margin-bottom:0;">Derniers résumés ajoutés</div>
+      <div class="view-toggle-wrap" style="margin-bottom:0;">
+        <button class="view-toggle-btn active" id="home-view-grid" onclick="setHomeView('grid')" title="Vue grille">⊞</button>
+        <button class="view-toggle-btn" id="home-view-list" onclick="setHomeView('list')" title="Vue liste">☰</button>
+      </div>
+    </div>
+    <div class="cover-cards-grid" id="home-covers-grid">
+      <!-- Carte built-in Tourist Season : masquée, injectée via renderHomeCovers -->
+      <div class="cover-card" id="home-card-ts1-static" onclick="showSection('seasons-of-carnage', null)" style="display:none;">
+        <div class="cover-card-placeholder" id="home-cover-ts1">📖</div>
+        <div class="cover-card-info">
+          <div class="cover-card-title">Tourist Season</div>
+          <div class="cover-card-author">Brynne Weaver</div>
+          <span class="cover-card-badge">🩸 Dark Romance</span>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- BLOC: STATS -->
   <div class="home-block" id="hblock-stats" data-block="stats">
     <div class="home-block-handle" title="Déplacer ce bloc">⠿</div>
@@ -2346,28 +2368,6 @@ footer:hover {
     <div id="fav-sagas-section">
       <div class="accueil-section-title">⭐ Sagas favorites</div>
       <div class="cover-cards-grid" id="fav-sagas-grid"></div>
-    </div>
-  </div>
-  <!-- BLOC: DERNIERS RÉSUMÉS -->
-  <div class="home-block" id="hblock-recents" data-block="recents">
-    <div class="home-block-handle" title="Déplacer ce bloc">⠿</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-      <div class="accueil-section-title" style="margin-bottom:0;">Derniers résumés ajoutés</div>
-      <div class="view-toggle-wrap" style="margin-bottom:0;">
-        <button class="view-toggle-btn active" id="home-view-grid" onclick="setHomeView('grid')" title="Vue grille">⊞</button>
-        <button class="view-toggle-btn" id="home-view-list" onclick="setHomeView('list')" title="Vue liste">☰</button>
-      </div>
-    </div>
-    <div class="cover-cards-grid" id="home-covers-grid">
-      <!-- Carte built-in Tourist Season : masquée, injectée via renderHomeCovers -->
-      <div class="cover-card" id="home-card-ts1-static" onclick="showSection('seasons-of-carnage', null)" style="display:none;">
-        <div class="cover-card-placeholder" id="home-cover-ts1">📖</div>
-        <div class="cover-card-info">
-          <div class="cover-card-title">Tourist Season</div>
-          <div class="cover-card-author">Brynne Weaver</div>
-          <span class="cover-card-badge">🩸 Dark Romance</span>
-        </div>
-      </div>
     </div>
   </div>
   </div><!-- fin home-blocks-container -->
@@ -4876,14 +4876,15 @@ function initHomeBlockDrag() {
   }
   getBlocks().forEach(setupBlock);
   // Restore saved order (from Firebase cache loaded in init)
+  // Ordre par défaut si aucun sauvegardé : recents, stats, favs
   try {
     const saved = _cache.homeBlockOrder;
-    if (saved) {
-      saved.forEach(blockId => {
-        const el = container.querySelector(`[data-block="${blockId}"]`);
-        if (el) container.appendChild(el);
-      });
-    }
+    const defaultOrder = ['recents', 'stats', 'favs'];
+    const order = (saved && saved.length) ? saved : defaultOrder;
+    order.forEach(blockId => {
+      const el = container.querySelector(`[data-block="${blockId}"]`);
+      if (el) container.appendChild(el);
+    });
   } catch {}
 }
 // ===== RICH TEXT EDITOR =====
