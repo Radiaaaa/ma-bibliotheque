@@ -4020,8 +4020,10 @@ function buildBookCard(book) {
 function renderHomeCovers(books) {
   const grid = document.getElementById('home-covers-grid');
   grid.querySelectorAll('.cover-card.dynamic').forEach(c => c.remove());
-  // Tourist Season exclu de la grille d'accueil (fiche résumé conservée)
-  const recent = [...books].reverse().slice(0, 5);
+  // Supprimer le bouton "voir tout" précédent
+  const prevBtn = document.getElementById('home-see-all-btn');
+  if (prevBtn) prevBtn.remove();
+  const recent = [...books].reverse().slice(0, 6);
   recent.forEach(book => {
     const genreConf = GENRE_COLORS[book.genre] || GENRE_COLORS['Romance'];
     const sagaId = makeSagaId(book.series || book.title);
@@ -4041,6 +4043,16 @@ function renderHomeCovers(books) {
     `;
     grid.appendChild(card);
   });
+  // Bouton "voir tout" si plus de 6 livres
+  if (books.length > 6) {
+    const btn = document.createElement('div');
+    btn.id = 'home-see-all-btn';
+    btn.className = 'cover-card dynamic';
+    btn.style.cssText = 'cursor:pointer;display:flex;align-items:center;justify-content:center;min-height:160px;border:2px dashed var(--pink-light);background:transparent;flex-direction:column;gap:8px;';
+    btn.onclick = () => showSection('all-series', null);
+    btn.innerHTML = '<span style="font-size:28px;">→</span><span style="font-size:12px;color:var(--text-muted);font-weight:600;">Voir tout</span>';
+    grid.appendChild(btn);
+  }
   updateStats(books);
   renderFavSagas(books);
 }
@@ -4762,16 +4774,20 @@ function initHomeBlockDrag() {
   function setupBlock(block) {
     const handle = block.querySelector('.home-block-handle');
     if (!handle) return;
-    handle.addEventListener('mousedown', () => {
-      block.setAttribute('draggable', 'true');
-    });
+    let dragFromHandle = false;
+    handle.addEventListener('mousedown', () => { dragFromHandle = true; block.setAttribute('draggable', 'true'); });
+    handle.addEventListener('mouseup', () => { dragFromHandle = false; });
+    document.addEventListener('mouseup', () => { if (!dragFromHandle) block.setAttribute('draggable', 'false'); });
+    block.setAttribute('draggable', 'true');
     block.addEventListener('dragstart', e => {
       homeBlockDragSrc = block;
       block.classList.add('dragging-block');
       e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', block.getAttribute('data-block'));
     });
     block.addEventListener('dragend', () => {
       block.setAttribute('draggable', 'false');
+      dragFromHandle = false;
       block.classList.remove('dragging-block');
       getBlocks().forEach(b => b.classList.remove('drag-over-block'));
       saveBlockOrder();
@@ -4779,6 +4795,7 @@ function initHomeBlockDrag() {
     block.addEventListener('dragover', e => {
       if (block === homeBlockDragSrc) return;
       e.preventDefault();
+      e.stopPropagation();
       getBlocks().forEach(b => b.classList.remove('drag-over-block'));
       block.classList.add('drag-over-block');
     });
