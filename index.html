@@ -7106,7 +7106,7 @@ async function triggerSync() {
       showSyncStatus('ok',
         '✅ Sync déclenchée ! Le workflow tourne sur GitHub Actions (~2 min). Rafraîchis la page dans quelques minutes.'
       );
-      setTimeout(() => window.location.reload(), 90_000);
+      setTimeout(() => importGoodreadsToFirebase(), 90_000);
     } else if (res.status === 401) {
       localStorage.removeItem(SYNC_CONFIG.tokenStorageKey);
       showSyncStatus('error', '❌ Token GitHub invalide ou expiré. Il a été supprimé — réessayez.');
@@ -7128,6 +7128,60 @@ function showSyncStatus(type, msg) {
   el.className = `sync-status ${type}`;
   el.textContent = msg;
 }
+
+// ──────────────────────────────────────────────────────────────
+//  Import Goodreads → Firebase (fusion sans écrasement)
+// ──────────────────────────────────────────────────────────────
+async function importGoodreadsToFirebase() {
+  try {
+    const res = await fetch('/data/books.json?v=' + Date.now());
+    if (!res.ok) throw new Error('books.json introuvable');
+    const data = await res.json();
+    const grBooks = data.books || [];
+
+    // Charger les livres existants depuis Firebase
+    const existing = await loadBooks();
+    const existingIds = new Set(existing.map(b => String(b.id)));
+
+    // Convertir le format Goodreads → format du site
+    const toImport = grBooks
+      .filter(b => !existingIds.has(String(b.id)))
+      .map(b => ({
+        id: String(b.id),
+        title: b.title,
+        author: b.author ? b.author.trim() : '',
+        status: b.status || 'lu',
+        rating: b.rating || null,
+        dateRead: b.dateRead || null,
+        cover: b.cover ? b.cover.replace('._SY75_', '._SX318_').replace('._SX50_', '._SX318_') : '',
+        series: b.saga || '',
+        summary: '',
+        spoilers: '',
+        tropes: [],
+        characters: [],
+        goodreadsId: String(b.id),
+        syncedFromGoodreads: true,
+      }));
+
+    if (toImport.length === 0) {
+      showSyncStatus('ok', '✅ Sync terminée — tous tes livres sont déjà à jour !');
+      return;
+    }
+
+    // Fusionner et sauvegarder
+    const merged = [...existing, ...toImport];
+    await saveBooks(merged);
+    sessionBooks = merged;
+    renderHomeCovers(merged);
+    renderAllSeries(merged);
+    updateStats(merged);
+
+    showSyncStatus('ok', `✅ ${toImport.length} livre(s) importé(s) depuis Goodreads !`);
+  } catch (e) {
+    showSyncStatus('error', '❌ Erreur import : ' + e.message);
+  }
+}
+window.importGoodreadsToFirebase = importGoodreadsToFirebase;
 
 async function loadBooksJson() {
   try {
