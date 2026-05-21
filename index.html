@@ -6847,6 +6847,304 @@ function exportBookPDF(bookId, e) {
 .series-suggest-item.active .suggest-match {
   color: var(--pink-deep);
 }
+
+/* ── Sync Modal ─────────────────────────────────────────── */
+.sync-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 1000;
+}
+
+.sync-fab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--pink-deep), var(--accent));
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 22px 12px 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(212, 120, 156, 0.40);
+  transition: all 0.2s ease;
+}
+.sync-fab-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212, 120, 156, 0.50);
+}
+.sync-fab-btn:active { transform: translateY(0); }
+.sync-fab-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.sync-fab-btn svg {
+  width: 16px; height: 16px;
+  transition: transform 0.6s ease;
+}
+.sync-fab-btn.spinning svg { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Sync Modal overlay ────────────────────────────────── */
+.sync-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(74, 45, 60, 0.5);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.sync-modal-overlay.open { display: flex; }
+
+.sync-modal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px 28px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(100, 40, 70, 0.20);
+  animation: modalIn 0.25s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0); }
+}
+.sync-modal h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.sync-modal p {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.sync-modal label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+.sync-modal input[type="text"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 16px;
+}
+.sync-modal input[type="text"]:focus { border-color: var(--pink-deep); }
+.sync-modal input[type="text"]::placeholder { color: var(--text-light); }
+
+.sync-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+.sync-btn-cancel {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.sync-btn-cancel:hover { background: var(--bg2); }
+.sync-btn-confirm {
+  flex: 2;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--pink-deep), var(--accent));
+  color: #fff;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.sync-btn-confirm:hover { opacity: 0.88; }
+.sync-btn-confirm:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.sync-status {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  display: none;
+}
+.sync-status.info  { background: var(--accent-pale); color: var(--pink-deep); display: block; }
+.sync-status.ok    { background: var(--mint-light); color: #2a6e5e; display: block; }
+.sync-status.error { background: #fde8ec; color: #c0304a; display: block; }
 </style>
+
+<!-- Bouton flottant Sync Goodreads -->
+<div class="sync-fab">
+  <button class="sync-fab-btn" id="syncFabBtn" onclick="openSyncModal()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M23 4v6h-6"/>
+      <path d="M1 20v-6h6"/>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/>
+      <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/>
+    </svg>
+    Sync Goodreads
+  </button>
+</div>
+
+<!-- Modal de sync -->
+<div class="sync-modal-overlay" id="syncModalOverlay">
+  <div class="sync-modal">
+    <h3>🔄 Synchroniser Goodreads</h3>
+    <p>Entrez votre identifiant Goodreads public pour récupérer vos livres lus et en cours.</p>
+
+    <label for="syncUserId">ID Goodreads</label>
+    <input type="text" id="syncUserId" placeholder="ex : 151708751-radia"
+           value="" autocomplete="off" spellcheck="false"/>
+
+    <div class="sync-modal-actions">
+      <button class="sync-btn-cancel" onclick="closeSyncModal()">Annuler</button>
+      <button class="sync-btn-confirm" id="syncConfirmBtn" onclick="triggerSync()">
+        Lancer la sync
+      </button>
+    </div>
+
+    <div class="sync-status" id="syncStatus"></div>
+  </div>
+</div>
+
+<script>
+const SYNC_CONFIG = {
+  repo: 'Radiaaaa/ma-bibliotheque',
+  tokenStorageKey: 'gr_sync_github_pat',
+};
+
+function openSyncModal() {
+  const saved = localStorage.getItem('gr_sync_user_id');
+  if (saved) document.getElementById('syncUserId').value = saved;
+  document.getElementById('syncStatus').className = 'sync-status';
+  document.getElementById('syncStatus').textContent = '';
+  document.getElementById('syncModalOverlay').classList.add('open');
+}
+
+function closeSyncModal() {
+  document.getElementById('syncModalOverlay').classList.remove('open');
+}
+
+document.getElementById('syncModalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeSyncModal();
+});
+
+async function triggerSync() {
+  const userId = document.getElementById('syncUserId').value.trim();
+  if (!userId) {
+    showSyncStatus('error', '⚠️ Veuillez entrer un ID Goodreads.');
+    return;
+  }
+
+  let pat = localStorage.getItem(SYNC_CONFIG.tokenStorageKey);
+  if (!pat) {
+    pat = prompt(
+      'Entrez votre GitHub Personal Access Token (scope : workflow).\n' +
+      'Il sera sauvegardé localement dans votre navigateur.'
+    );
+    if (!pat) return;
+    localStorage.setItem(SYNC_CONFIG.tokenStorageKey, pat.trim());
+    pat = pat.trim();
+  }
+
+  localStorage.setItem('gr_sync_user_id', userId);
+
+  const btn = document.getElementById('syncConfirmBtn');
+  const fab = document.getElementById('syncFabBtn');
+  btn.disabled = true;
+  fab.disabled = true;
+  fab.classList.add('spinning');
+  showSyncStatus('info', '⏳ Déclenchement du workflow GitHub Actions…');
+
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${SYNC_CONFIG.repo}/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `token ${pat}`,
+          Accept: 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          event_type: 'sync-goodreads',
+          client_payload: { goodreads_user_id: userId },
+        }),
+      }
+    );
+
+    if (res.status === 204) {
+      showSyncStatus('ok',
+        '✅ Sync déclenchée ! Le workflow tourne sur GitHub Actions (~2 min). Rafraîchis la page dans quelques minutes.'
+      );
+      setTimeout(() => window.location.reload(), 90_000);
+    } else if (res.status === 401) {
+      localStorage.removeItem(SYNC_CONFIG.tokenStorageKey);
+      showSyncStatus('error', '❌ Token GitHub invalide ou expiré. Il a été supprimé — réessayez.');
+    } else {
+      const body = await res.text();
+      showSyncStatus('error', `❌ Erreur ${res.status} : ${body || 'Unknown error'}`);
+    }
+  } catch (err) {
+    showSyncStatus('error', `❌ Erreur réseau : ${err.message}`);
+  } finally {
+    btn.disabled = false;
+    fab.disabled = false;
+    fab.classList.remove('spinning');
+  }
+}
+
+function showSyncStatus(type, msg) {
+  const el = document.getElementById('syncStatus');
+  el.className = `sync-status ${type}`;
+  el.textContent = msg;
+}
+
+async function loadBooksJson() {
+  try {
+    const res = await fetch('/data/books.json?v=' + Date.now());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    return data.books || [];
+  } catch (e) {
+    console.warn('books.json not found or invalid:', e.message);
+    return [];
+  }
+}
+
+window.loadBooksJson = loadBooksJson;
+window.openSyncModal = openSyncModal;
+window.closeSyncModal = closeSyncModal;
+window.triggerSync = triggerSync;
+</script>
 </body>
 </html>
