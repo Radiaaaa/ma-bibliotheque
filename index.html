@@ -7134,7 +7134,7 @@ function showSyncStatus(type, msg) {
 // ──────────────────────────────────────────────────────────────
 async function importGoodreadsToFirebase() {
   try {
-    const res = await fetch('/data/books.json?v=' + Date.now());
+    const res = await fetch('https://raw.githubusercontent.com/Radiaaaa/ma-bibliotheque/main/data/books.json?v=' + Date.now());
     if (!res.ok) throw new Error('books.json introuvable');
     const data = await res.json();
     const grBooks = data.books || [];
