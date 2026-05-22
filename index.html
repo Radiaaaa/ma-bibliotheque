@@ -2874,6 +2874,11 @@ footer:hover {
       <span class="ml-stat-label">En cours</span>
     </div>
   </div>
+  <!-- Coups de cœur -->
+  <div class="ml-coeur-section" id="ml-coeur-section" style="display:none;">
+    <div class="ml-coeur-title">💛 Coups de cœur 2026</div>
+    <div class="ml-coeur-grid" id="ml-coeur-grid"></div>
+  </div>
   <!-- Filtres -->
   <div class="ml-filters">
     <button class="ml-filter-btn active" data-ml-filter="all" onclick="setMlFilter('all',this)">Tous</button>
@@ -6980,6 +6985,61 @@ function exportBookPDF(bookId, e) {
   color: var(--text-muted); font-family: 'Fraunces', serif;
   font-style: italic; font-size: 15px;
 }
+.ml-book-card { position: relative; }
+.ml-add-resume-btn {
+  position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+  background: var(--pink-deep); color: white;
+  border: none; border-radius: 12px;
+  padding: 5px 12px; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.5px; white-space: nowrap;
+  cursor: pointer; opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  font-family: 'Jost', sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  z-index: 2;
+}
+.ml-book-card:hover .ml-add-resume-btn { opacity: 1; transform: translateX(-50%) translateY(-2px); }
+.ml-book-card.has-resume { border-color: var(--pink); }
+.ml-book-card.has-resume::after {
+  content: '✓';
+  position: absolute; top: 6px; right: 6px;
+  background: var(--pink-deep); color: white;
+  font-size: 10px; font-weight: 700;
+  width: 18px; height: 18px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+}
+/* Coups de cœur */
+.ml-coeur-section { margin-bottom: 32px; }
+.ml-coeur-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 700; color: var(--text);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.ml-coeur-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+.ml-coeur-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+}
+.ml-coeur-card {
+  background: var(--card); border: 1.5px solid var(--butter);
+  border-radius: var(--radius-sm); overflow: hidden;
+  box-shadow: 0 2px 12px rgba(212,176,96,0.18);
+  transition: all 0.22s; position: relative;
+}
+.ml-coeur-card:hover { box-shadow: 0 6px 20px rgba(212,176,96,0.32); transform: translateY(-3px); }
+.ml-coeur-badge {
+  position: absolute; top: 6px; left: 6px;
+  background: var(--butter); color: #7a5a00;
+  font-size: 10px; font-weight: 700; padding: 2px 7px;
+  border-radius: 8px; letter-spacing: 0.3px;
+}
+
 
 .sync-fab {
   position: fixed;
@@ -7339,6 +7399,33 @@ function setMlFilter(filter, btn) {
   renderMesLectures(sessionBooks || []);
 }
 
+function openAddResumeForBook(book) {
+  // Vider le formulaire d'abord
+  clearForm();
+  // Pré-remplir
+  const setVal = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+  setVal('new-title', book.title || '');
+  setVal('new-author', book.author || '');
+  setVal('new-series', book.series || '');
+  // Couverture
+  const coverUrl = book.cover || book.coverUrl || '';
+  if (coverUrl) {
+    setVal('new-cover-url', coverUrl);
+    selectedCoverUrl = coverUrl;
+    const img = document.getElementById('cover-preview-img');
+    const preview = document.getElementById('cover-selected-preview');
+    if (img) img.src = coverUrl;
+    if (preview) preview.style.display = 'flex';
+  }
+  // Pages si dispo
+  if (book.pageCount) setVal('new-pages', book.pageCount);
+  // Naviguer vers le formulaire
+  showSection('add-section', document.querySelector('[data-section="add-section"]'));
+  // Scroll en haut
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.openAddResumeForBook = openAddResumeForBook;
+
 function renderMesLectures(allBooks) {
   const grBooks = allBooks.filter(b => b.syncedFromGoodreads === true);
   const YEAR = 2026;
@@ -7352,7 +7439,7 @@ function renderMesLectures(allBooks) {
   const aLire   = grBooks.filter(b => b.status === 'to-read' || b.status === 'à lire');
   const pagesAnnee = lusCetteAnnee.reduce((s, b) => s + (parseInt(b.pageCount) || parseInt(b.pages) || 280), 0);
 
-  // Mettre à jour les stats
+  // Stats DOM
   const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
   setEl('ml-stat-total', grBooks.length);
   setEl('ml-stat-year', lusCetteAnnee.length);
@@ -7361,7 +7448,36 @@ function renderMesLectures(allBooks) {
   const sub = document.getElementById('ml-subtitle');
   if (sub) sub.textContent = `${grBooks.length} livre${grBooks.length > 1 ? 's' : ''} importé${grBooks.length > 1 ? 's' : ''}`;
 
-  // Filtrage
+  // ── Coups de cœur 2026 : 4-5 étoiles, lu en 2026 ──
+  const coeursSection = document.getElementById('ml-coeur-section');
+  const coeursGrid    = document.getElementById('ml-coeur-grid');
+  const coeurs = lusCetteAnnee.filter(b => parseInt(b.rating) >= 4)
+    .sort((a, b) => (parseInt(b.rating) || 0) - (parseInt(a.rating) || 0));
+  if (coeursSection && coeursGrid) {
+    coeursSection.style.display = coeurs.length ? '' : 'none';
+    coeursGrid.innerHTML = '';
+    coeurs.forEach(book => {
+      const coverUrl = book.cover || book.coverUrl || '';
+      const rating = parseInt(book.rating) || 0;
+      const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+      const card = document.createElement('div');
+      card.className = 'ml-coeur-card';
+      card.innerHTML = `
+        <span class="ml-coeur-badge">${rating === 5 ? '✨ 5★' : '💛 4★'}</span>
+        ${coverUrl
+          ? `<img class="ml-book-cover" src="${coverUrl}" alt="${book.title}" loading="lazy" onerror="this.outerHTML='<div class=\\'ml-book-cover-placeholder\\'>📖</div>'">`
+          : `<div class="ml-book-cover-placeholder">📖</div>`}
+        <div class="ml-book-info">
+          <div class="ml-book-title">${book.title || ''}</div>
+          <div class="ml-book-author">${book.author || ''}</div>
+          <div class="ml-book-stars">${stars}</div>
+        </div>
+      `;
+      coeursGrid.appendChild(card);
+    });
+  }
+
+  // ── Filtrage principal ──
   let filtered = grBooks;
   if (_mlFilter === 'year') filtered = lusCetteAnnee;
   else if (_mlFilter === 'encours') filtered = enCours;
@@ -7377,7 +7493,7 @@ function renderMesLectures(allBooks) {
     return;
   }
 
-  // Trier : lus en 2026 en premier (par dateRead desc), puis reste
+  // Tri : dateRead desc
   filtered = [...filtered].sort((a, b) => {
     const da = a.dateRead ? new Date(a.dateRead) : new Date(0);
     const db_ = b.dateRead ? new Date(b.dateRead) : new Date(0);
@@ -7386,7 +7502,8 @@ function renderMesLectures(allBooks) {
 
   filtered.forEach(book => {
     const card = document.createElement('div');
-    card.className = 'ml-book-card';
+    const hasResume = !!(book.summary || book.resume);
+    card.className = 'ml-book-card' + (hasResume ? ' has-resume' : '');
 
     const coverUrl = book.cover || book.coverUrl || '';
     const coverHtml = coverUrl
@@ -7394,15 +7511,19 @@ function renderMesLectures(allBooks) {
       : `<div class="ml-book-cover-placeholder">📖</div>`;
 
     const rating = parseInt(book.rating) || 0;
-    const stars = rating > 0
-      ? '★'.repeat(rating) + '☆'.repeat(5 - rating)
-      : '';
+    const stars = rating > 0 ? '★'.repeat(rating) + '☆'.repeat(5 - rating) : '';
 
     const status = book.status || '';
     let statusLabel = '', statusClass = 'ml-status-aLire';
     if (status === 'read' || status === 'lu') { statusLabel = '✓ Lu'; statusClass = 'ml-status-lu'; }
     else if (status === 'currently-reading' || status === 'en cours') { statusLabel = '📖 En cours'; statusClass = 'ml-status-encours'; }
     else if (status === 'to-read' || status === 'à lire') { statusLabel = '🔖 À lire'; statusClass = 'ml-status-aLire'; }
+
+    // Sérialise le book pour le passer au onclick sans références circulaires
+    const bookJson = JSON.stringify({
+      id: book.id, title: book.title, author: book.author,
+      series: book.series, cover: coverUrl, coverUrl, pageCount: book.pageCount || book.pages || ''
+    }).replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
     card.innerHTML = `
       ${coverHtml}
@@ -7412,10 +7533,16 @@ function renderMesLectures(allBooks) {
         ${stars ? `<div class="ml-book-stars">${stars}</div>` : ''}
         ${statusLabel ? `<span class="ml-book-status ${statusClass}">${statusLabel}</span>` : ''}
       </div>
+      <button class="ml-add-resume-btn" title="Ajouter un résumé"
+        onclick="openAddResumeForBook(JSON.parse(this.dataset.book))"
+        data-book="${bookJson}">
+        ${hasResume ? '✏️ Modifier résumé' : '+ Ajouter résumé'}
+      </button>
     `;
     grid.appendChild(card);
   });
 }
+
 
 // Hook dans showSection pour rafraîchir à l'ouverture
 
