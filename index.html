@@ -2112,6 +2112,7 @@ footer:hover {
     </div>
     <button class="nav-btn add-btn" onclick="showSection('add-section', this)" data-section="add-section">+ Ajouter</button>
     <button class="nav-btn" onclick="showSection('all-series', this)" data-section="all-series">Series</button>
+    <button class="nav-btn" onclick="showSection('mes-lectures', this)" data-section="mes-lectures">📚 Mes lectures</button>
   </div>
 </nav>
 <div class="nav-search-dropdown" id="nav-search-dropdown"></div>
@@ -2844,6 +2845,46 @@ footer:hover {
   </div>
 </div>
 <!-- FIN ADD SECTION -->
+<!-- ===== MES LECTURES ===== -->
+<div id="mes-lectures" class="section">
+  <div class="series-header" style="margin-bottom:24px;">
+    <div class="series-badge-fallback" style="background:var(--pink-light);">📚</div>
+    <div class="series-info">
+      <h2>Mes lectures</h2>
+      <div class="series-author">Importées depuis Goodreads</div>
+      <div class="series-meta" id="ml-subtitle">Chargement…</div>
+    </div>
+  </div>
+  <!-- Stats -->
+  <div class="ml-stats-bar" id="ml-stats-bar">
+    <div class="ml-stat-card">
+      <span class="ml-stat-num" id="ml-stat-total">0</span>
+      <span class="ml-stat-label">Total</span>
+    </div>
+    <div class="ml-stat-card">
+      <span class="ml-stat-num" id="ml-stat-year">0</span>
+      <span class="ml-stat-label">Lus en 2026</span>
+    </div>
+    <div class="ml-stat-card">
+      <span class="ml-stat-num" id="ml-stat-pages">0</span>
+      <span class="ml-stat-label">Pages en 2026</span>
+    </div>
+    <div class="ml-stat-card">
+      <span class="ml-stat-num" id="ml-stat-encours">0</span>
+      <span class="ml-stat-label">En cours</span>
+    </div>
+  </div>
+  <!-- Filtres -->
+  <div class="ml-filters">
+    <button class="ml-filter-btn active" data-ml-filter="all" onclick="setMlFilter('all',this)">Tous</button>
+    <button class="ml-filter-btn" data-ml-filter="year" onclick="setMlFilter('year',this)">📅 Lus en 2026</button>
+    <button class="ml-filter-btn" data-ml-filter="encours" onclick="setMlFilter('encours',this)">📖 En cours</button>
+    <button class="ml-filter-btn" data-ml-filter="toread" onclick="setMlFilter('toread',this)">🔖 À lire</button>
+  </div>
+  <!-- Grille -->
+  <div class="ml-grid" id="ml-grid"></div>
+</div>
+<!-- FIN MES LECTURES -->
 </main>
 <!-- SHARE POSTER MODAL -->
 <div class="modal-overlay" id="share-modal" onclick="closeShareOutside(event)">
@@ -3866,7 +3907,16 @@ function resolveSectionId(sagaId) {
   return isBuiltinSaga(sagaId) || sagaId;
 }
 // ===== RENDER DYNAMIC SAGAS =====
+// ===== FILTRE LIVRES ÉDITORIAUX =====
+// Un livre Goodreads sans résumé n'apparaît pas dans les sagas / section récents.
+// Dès que summary est rempli, il rejoint automatiquement les sections normales.
+function isEditorialBook(book) {
+  return !(book.syncedFromGoodreads === true && !book.summary && !book.resume);
+}
+
 function renderDynamicSagas(books) {
+  // Exclure les livres Goodreads sans résumé
+  books = books.filter(isEditorialBook);
   // Group books by series (or title if no series)
   const groups = {};
   books.forEach(book => {
@@ -4083,7 +4133,7 @@ function renderHomeCovers(books) {
   // Supprimer le bouton "voir tout" précédent
   const prevBtn = document.getElementById('home-see-all-btn');
   if (prevBtn) prevBtn.remove();
-  const recent = [...books].reverse().slice(0, 6);
+  const recent = [...books].filter(isEditorialBook).reverse().slice(0, 6);
   recent.forEach(book => {
     const genreConf = GENRE_COLORS[book.genre] || GENRE_COLORS['Romance'];
     const sagaId = makeSagaId(book.series || book.title);
@@ -5333,6 +5383,8 @@ function renderAllSeries(books) {
   if (!grid) return;
   // Remove previously added dynamic cards
   grid.querySelectorAll('.series-card-dynamic').forEach(c => c.remove());
+  // Exclure les livres Goodreads sans résumé
+  books = books.filter(isEditorialBook);
   // Seasons of Carnage exclu de la grille des séries (fiche résumé conservée)
   // Gather all dynamic series from books
   const seen = new Set(['seasons-of-carnage']);
@@ -6848,7 +6900,86 @@ function exportBookPDF(bookId, e) {
   color: var(--pink-deep);
 }
 
-/* ── Sync Modal ─────────────────────────────────────────── */
+/* =====================
+   MES LECTURES (Goodreads)
+   ===================== */
+.ml-stats-bar {
+  display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 24px;
+}
+.ml-stat-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 14px 20px;
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 100px; box-shadow: var(--shadow);
+}
+.ml-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700; color: var(--pink-deep); line-height: 1;
+}
+.ml-stat-label {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-muted); margin-top: 4px; font-weight: 600;
+}
+.ml-filters {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+}
+.ml-filter-btn {
+  background: var(--bg2); border: 1.5px solid var(--border);
+  border-radius: 20px; padding: 6px 16px;
+  font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500;
+  letter-spacing: 0.5px; color: var(--text-muted);
+  cursor: pointer; transition: all 0.18s;
+}
+.ml-filter-btn:hover { border-color: var(--pink); color: var(--text); }
+.ml-filter-btn.active {
+  background: var(--pink-light); border-color: var(--pink-deep);
+  color: var(--pink-deep); font-weight: 600;
+}
+.ml-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+}
+.ml-book-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); overflow: hidden;
+  cursor: default; transition: all 0.22s;
+  box-shadow: var(--shadow);
+}
+.ml-book-card:hover { box-shadow: var(--shadow-hover); border-color: var(--pink); transform: translateY(-3px); }
+.ml-book-cover {
+  width: 100%; aspect-ratio: 2/3; object-fit: cover;
+  display: block; background: var(--pink-light);
+}
+.ml-book-cover-placeholder {
+  width: 100%; aspect-ratio: 2/3;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; background: var(--pink-light);
+}
+.ml-book-info { padding: 8px 10px; }
+.ml-book-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px; font-weight: 600; color: var(--text);
+  line-height: 1.3; margin-bottom: 3px;
+  overflow: hidden; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.ml-book-author { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ml-book-stars { font-size: 11px; color: #d4b060; letter-spacing: 1px; }
+.ml-book-status {
+  display: inline-block; font-size: 10px; padding: 2px 7px;
+  border-radius: 8px; font-weight: 500; letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+.ml-status-lu { background: var(--mint-light); color: #2a6855; border: 1px solid var(--mint); }
+.ml-status-encours { background: var(--pink-light); color: var(--pink-deep); border: 1px solid var(--pink); }
+.ml-status-aLire { background: var(--bg2); color: var(--text-muted); border: 1px solid var(--border); }
+.ml-empty {
+  text-align: center; padding: 48px 24px;
+  color: var(--text-muted); font-family: 'Fraunces', serif;
+  font-style: italic; font-size: 15px;
+}
+
 .sync-fab {
   position: fixed;
   bottom: 28px;
@@ -7177,6 +7308,8 @@ async function importGoodreadsToFirebase() {
     updateStats(merged);
 
     showSyncStatus('ok', `✅ ${toImport.length} livre(s) importé(s) depuis Goodreads !`);
+    // Rafraîchir la page Mes Lectures si elle est visible
+    renderMesLectures(merged);
   } catch (e) {
     showSyncStatus('error', '❌ Erreur import : ' + e.message);
   }
@@ -7195,10 +7328,104 @@ async function loadBooksJson() {
   }
 }
 
-window.loadBooksJson = loadBooksJson;
-window.openSyncModal = openSyncModal;
-window.closeSyncModal = closeSyncModal;
-window.triggerSync = triggerSync;
+// ===== MES LECTURES (Goodreads) =====
+let _mlFilter = 'all';
+
+function setMlFilter(filter, btn) {
+  _mlFilter = filter;
+  document.querySelectorAll('.ml-filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderMesLectures(sessionBooks || []);
+}
+
+function renderMesLectures(allBooks) {
+  const grBooks = allBooks.filter(b => b.syncedFromGoodreads === true);
+  const YEAR = 2026;
+
+  // Stats
+  const lusCetteAnnee = grBooks.filter(b => {
+    if (!b.dateRead) return false;
+    try { return new Date(b.dateRead).getFullYear() === YEAR; } catch { return false; }
+  });
+  const enCours = grBooks.filter(b => b.status === 'currently-reading' || b.status === 'en cours');
+  const aLire   = grBooks.filter(b => b.status === 'to-read' || b.status === 'à lire');
+  const pagesAnnee = lusCetteAnnee.reduce((s, b) => s + (parseInt(b.pageCount) || parseInt(b.pages) || 280), 0);
+
+  // Mettre à jour les stats
+  const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  setEl('ml-stat-total', grBooks.length);
+  setEl('ml-stat-year', lusCetteAnnee.length);
+  setEl('ml-stat-pages', pagesAnnee.toLocaleString('fr-FR'));
+  setEl('ml-stat-encours', enCours.length);
+  const sub = document.getElementById('ml-subtitle');
+  if (sub) sub.textContent = `${grBooks.length} livre${grBooks.length > 1 ? 's' : ''} importé${grBooks.length > 1 ? 's' : ''}`;
+
+  // Filtrage
+  let filtered = grBooks;
+  if (_mlFilter === 'year') filtered = lusCetteAnnee;
+  else if (_mlFilter === 'encours') filtered = enCours;
+  else if (_mlFilter === 'toread') filtered = aLire;
+
+  // Rendu grille
+  const grid = document.getElementById('ml-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="ml-empty">Aucun livre pour ce filtre 🌸</div>';
+    return;
+  }
+
+  // Trier : lus en 2026 en premier (par dateRead desc), puis reste
+  filtered = [...filtered].sort((a, b) => {
+    const da = a.dateRead ? new Date(a.dateRead) : new Date(0);
+    const db_ = b.dateRead ? new Date(b.dateRead) : new Date(0);
+    return db_ - da;
+  });
+
+  filtered.forEach(book => {
+    const card = document.createElement('div');
+    card.className = 'ml-book-card';
+
+    const coverUrl = book.cover || book.coverUrl || '';
+    const coverHtml = coverUrl
+      ? `<img class="ml-book-cover" src="${coverUrl}" alt="${book.title}" loading="lazy" onerror="this.outerHTML='<div class=\\'ml-book-cover-placeholder\\'>📖</div>'">`
+      : `<div class="ml-book-cover-placeholder">📖</div>`;
+
+    const rating = parseInt(book.rating) || 0;
+    const stars = rating > 0
+      ? '★'.repeat(rating) + '☆'.repeat(5 - rating)
+      : '';
+
+    const status = book.status || '';
+    let statusLabel = '', statusClass = 'ml-status-aLire';
+    if (status === 'read' || status === 'lu') { statusLabel = '✓ Lu'; statusClass = 'ml-status-lu'; }
+    else if (status === 'currently-reading' || status === 'en cours') { statusLabel = '📖 En cours'; statusClass = 'ml-status-encours'; }
+    else if (status === 'to-read' || status === 'à lire') { statusLabel = '🔖 À lire'; statusClass = 'ml-status-aLire'; }
+
+    card.innerHTML = `
+      ${coverHtml}
+      <div class="ml-book-info">
+        <div class="ml-book-title">${book.title || ''}</div>
+        <div class="ml-book-author">${book.author || ''}</div>
+        ${stars ? `<div class="ml-book-stars">${stars}</div>` : ''}
+        ${statusLabel ? `<span class="ml-book-status ${statusClass}">${statusLabel}</span>` : ''}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// Hook dans showSection pour rafraîchir à l'ouverture
+const _origShowSection = showSection;
+function showSection(id, btn) {
+  _origShowSection(id, btn);
+  if (id === 'mes-lectures') renderMesLectures(sessionBooks || []);
+}
+
+window.setMlFilter = setMlFilter;
+window.renderMesLectures = renderMesLectures;
+
 </script>
 </body>
 </html>
