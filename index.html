@@ -3645,6 +3645,7 @@ function showSection(id, btn) {
   targetSection.classList.add('visible');
   if (btn) btn.classList.add('active');
   if (id === 'bibliotheque') { setTimeout(initLibrary, 0); }
+  else if (id === 'mes-lectures') { setTimeout(() => renderMesLectures(sessionBooks || []), 0); }
   else {
     const matchBtn = document.querySelector(`[data-section="${id}"]`);
     if (matchBtn) matchBtn.classList.add('active');
@@ -7417,11 +7418,6 @@ function renderMesLectures(allBooks) {
 }
 
 // Hook dans showSection pour rafraîchir à l'ouverture
-const _origShowSection = showSection;
-function showSection(id, btn) {
-  _origShowSection(id, btn);
-  if (id === 'mes-lectures') renderMesLectures(sessionBooks || []);
-}
 
 window.setMlFilter = setMlFilter;
 window.renderMesLectures = renderMesLectures;
