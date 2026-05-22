@@ -611,6 +611,14 @@ main {
 }
 .badge-pages { border-color: var(--border2); color: var(--text-muted); background: var(--bg2); }
 .badge-spoiler { border-color: var(--pink); color: var(--pink-deep); background: var(--pink-light); }
+/* Notes / étoiles */
+.form-stars { display: flex; align-items: center; gap: 4px; margin-top: 6px; }
+.form-star { font-size: 24px; color: var(--border2); cursor: pointer; transition: color 0.15s, transform 0.12s; line-height: 1; }
+.form-star.lit { color: #d4b060; }
+.form-star:hover { transform: scale(1.2); }
+.form-star-clear { font-size: 13px; color: var(--text-muted); cursor: pointer; margin-left: 6px; opacity: 0.5; transition: opacity 0.15s; }
+.form-star-clear:hover { opacity: 1; color: var(--rose); }
+.badge-rating { color: #d4b060; letter-spacing: 1px; font-size: 12px; background: var(--butter-light); border-color: var(--butter); }
 .toggle-icon {
   color: var(--text-muted);
   font-size: 18px;
@@ -2241,6 +2249,18 @@ footer:hover {
       </select>
     </div>
     <div class="modal-field">
+      <label>Ma note</label>
+      <div class="form-stars" id="form-stars-edit">
+        <span class="form-star" data-r="1" onclick="setFormRating('edit',1)">★</span>
+        <span class="form-star" data-r="2" onclick="setFormRating('edit',2)">★</span>
+        <span class="form-star" data-r="3" onclick="setFormRating('edit',3)">★</span>
+        <span class="form-star" data-r="4" onclick="setFormRating('edit',4)">★</span>
+        <span class="form-star" data-r="5" onclick="setFormRating('edit',5)">★</span>
+        <span class="form-star-clear" onclick="setFormRating('edit',0)">✕</span>
+      </div>
+      <input type="hidden" id="edit-book-rating" value="0">
+    </div>
+    <div class="modal-field">
       <label>Résumé</label>
       <div class="rte-wrap" id="edit-rte-resume">
         <div class="rte-toolbar" onmousedown="rteToolbarDown(event,'edit-rte-resume')">
@@ -2656,6 +2676,18 @@ footer:hover {
         <label>Année de publication</label>
         <input type="number" id="new-year" placeholder="2015">
       </div>
+    </div>
+    <div style="margin-top:14px;">
+      <label>Ma note</label>
+      <div class="form-stars" id="form-stars-add">
+        <span class="form-star" data-r="1" onclick="setFormRating('add',1)">★</span>
+        <span class="form-star" data-r="2" onclick="setFormRating('add',2)">★</span>
+        <span class="form-star" data-r="3" onclick="setFormRating('add',3)">★</span>
+        <span class="form-star" data-r="4" onclick="setFormRating('add',4)">★</span>
+        <span class="form-star" data-r="5" onclick="setFormRating('add',5)">★</span>
+        <span class="form-star-clear" onclick="setFormRating('add',0)">✕</span>
+      </div>
+      <input type="hidden" id="new-rating" value="0">
     </div>
   </div>
   <!-- STEP 2: COUVERTURE -->
@@ -3819,6 +3851,7 @@ async function saveBook() {
     tome: document.getElementById('new-tome').value.trim(),
     pages: document.getElementById('new-pages').value.trim(),
     year: document.getElementById('new-year').value.trim(),
+    rating: parseInt(document.getElementById('new-rating').value) || 0,
     genre,
     coverUrl,
     tropes: [...currentTropes],
@@ -3885,6 +3918,7 @@ function clearForm() {
     const el = document.getElementById(id);
     if (el) el.value = '';
   });
+  setFormRating('add', 0);
   // Clear RTE editors
   ['resume','twists','remember','cw'].forEach(key => {
     const body = document.getElementById('rte-body-' + key);
@@ -4046,6 +4080,7 @@ function buildBookCard(book) {
       <div class="book-card-right">
         ${book.genre ? `<span class="badge" style="background:${genreConf.bg};border-color:${genreConf.border};color:${genreConf.text};">${genreConf.emoji} ${book.genre}</span>` : ''}
         ${book.pages ? `<span class="badge badge-pages">📄 ${book.pages} p.</span>` : ''}
+        ${book.rating ? `<span class="badge badge-rating">${'★'.repeat(parseInt(book.rating))}${'☆'.repeat(5-parseInt(book.rating))}</span>` : ''}
         <span class="badge badge-spoiler">⚠ Spoilers</span>
       </div>
       <span class="toggle-icon">▾</span>
@@ -5451,6 +5486,7 @@ function openEditBook(id, e) {
   document.getElementById('edit-book-year').value = book.year || '';
   document.getElementById('edit-book-cover').value = book.coverUrl || '';
   document.getElementById('edit-book-genre').value = book.genre || '';
+  setFormRating('edit', parseInt(book.rating) || 0);
   // Populate RTE fields
   ['resume','twists','remember','cw'].forEach(key => {
     const body = document.getElementById('edit-rte-body-' + key);
@@ -5490,6 +5526,7 @@ async function saveEditBook() {
       year: document.getElementById('edit-book-year').value.trim(),
       coverUrl: document.getElementById('edit-book-cover').value.trim(),
       genre: document.getElementById('edit-book-genre').value,
+      rating: parseInt(document.getElementById('edit-book-rating').value) || 0,
       resume: document.getElementById('edit-book-resume').value.trim(),
       twists: document.getElementById('edit-book-twists').value.trim(),
       remember: document.getElementById('edit-book-remember').value.trim(),
@@ -6960,6 +6997,45 @@ function exportBookPDF(bookId, e) {
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 16px;
 }
+/* Séparateurs par année */
+.ml-year-separator {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; gap: 14px;
+  margin: 20px 0 6px;
+}
+.ml-year-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 3px;
+  color: var(--text-muted); text-transform: uppercase;
+  white-space: nowrap;
+}
+.ml-year-separator::before,
+.ml-year-separator::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.ml-year-subgrid {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+}
+/* Boutons action dans la DA */
+.ml-action-row {
+  display: flex; gap: 5px; padding: 6px 8px 8px;
+  border-top: 1px solid var(--border);
+}
+.ml-action-btn {
+  flex: 1; padding: 5px 4px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px; background: var(--bg2);
+  font-family: 'Jost', sans-serif; font-size: 10px;
+  font-weight: 500; color: var(--text-muted);
+  cursor: pointer; transition: all 0.18s;
+  white-space: nowrap; text-align: center; line-height: 1.2;
+}
+.ml-action-btn:hover { border-color: var(--pink); color: var(--pink-deep); background: var(--pink-light); }
+.ml-btn-resume { border-color: var(--pink-light); color: var(--pink-deep); }
 .ml-book-card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: var(--radius-sm); overflow: hidden;
@@ -7582,7 +7658,29 @@ function renderMesLectures(allBooks) {
     return db_ - da;
   });
 
+  // ── Rendu avec séparateurs par année ──
+  const useYearSeparators = (_mlFilter === 'all' || _mlFilter === 'year');
+  let currentYear = null;
+
   filtered.forEach(book => {
+    // Séparateur année
+    if (useYearSeparators) {
+      let bookYear = null;
+      if (book.dateRead) {
+        try { bookYear = new Date(book.dateRead).getFullYear(); } catch {}
+      }
+      if (bookYear !== currentYear) {
+        currentYear = bookYear;
+        const sep = document.createElement('div');
+        sep.className = 'ml-year-separator';
+        sep.innerHTML = `<span class="ml-year-label">${bookYear || '—'}</span>`;
+        grid.appendChild(sep);
+        const subGrid = document.createElement('div');
+        subGrid.className = 'ml-year-subgrid';
+        grid.appendChild(subGrid);
+      }
+    }
+
     const card = document.createElement('div');
     const hasResume = !!(book.summary || book.resume);
     const isCoeur = coeurIds.has(String(book.id));
@@ -7608,16 +7706,17 @@ function renderMesLectures(allBooks) {
       pageCount: book.pageCount || book.pages || ''
     }).replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
-    // Boutons d'action selon état
+    // Boutons d'action dans la DA du site
     let actionBtn = '';
     if (hasResume) {
-      actionBtn = `<button class="ml-add-resume-btn" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">✏️ Modifier</button>`;
+      actionBtn = `<div class="ml-action-row"><button class="ml-action-btn ml-btn-resume" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">✏️ Résumé</button></div>`;
     } else if (book.linkedFromGoodreads) {
-      actionBtn = `<button class="ml-add-resume-btn" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">+ Résumé</button>`;
+      actionBtn = `<div class="ml-action-row"><button class="ml-action-btn ml-btn-resume" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">+ Résumé</button></div>`;
     } else {
-      actionBtn = `
-        <button class="ml-add-resume-btn ml-btn-new" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}" style="bottom:38px;">+ Résumé</button>
-        <button class="ml-add-resume-btn ml-btn-link" onclick="event.stopPropagation();openLinkModal(JSON.parse(this.dataset.book))" data-book="${bookMini}">🔗 Lier</button>`;
+      actionBtn = `<div class="ml-action-row">
+        <button class="ml-action-btn ml-btn-resume" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">+ Résumé</button>
+        <button class="ml-action-btn ml-btn-link" onclick="event.stopPropagation();openLinkModal(JSON.parse(this.dataset.book))" data-book="${bookMini}">🔗 Lier</button>
+      </div>`;
     }
 
     card.innerHTML = `
@@ -7634,7 +7733,14 @@ function renderMesLectures(allBooks) {
       </div>
       ${actionBtn}
     `;
-    grid.appendChild(card);
+
+    if (useYearSeparators) {
+      const subGrid = grid.querySelector('.ml-year-subgrid:last-of-type');
+      if (subGrid) subGrid.appendChild(card);
+      else grid.appendChild(card);
+    } else {
+      grid.appendChild(card);
+    }
   });
 }
 // Hook dans showSection pour rafraîchir à l'ouverture
@@ -7675,6 +7781,20 @@ async function toggleCoeur(bookId) {
   renderMesLectures(sessionBooks || []);
 }
 window.toggleCoeur = toggleCoeur;
+
+// ===== FORM RATING =====
+function setFormRating(context, value) {
+  const containerId = context === 'add' ? 'form-stars-add' : 'form-stars-edit';
+  const hiddenId    = context === 'add' ? 'new-rating' : 'edit-book-rating';
+  const container = document.getElementById(containerId);
+  const hidden    = document.getElementById(hiddenId);
+  if (!container || !hidden) return;
+  hidden.value = value;
+  container.querySelectorAll('.form-star').forEach(s => {
+    s.classList.toggle('lit', parseInt(s.dataset.r) <= value);
+  });
+}
+window.setFormRating = setFormRating;
 
 // ===== LIER LIVRE GR À RÉSUMÉ =====
 let _linkingBook = null; // le livre GR en cours de liaison
