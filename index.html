@@ -6960,6 +6960,10 @@ function exportBookPDF(bookId, e) {
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 16px;
 }
+.ml-year-separator,
+.ml-year-subgrid {
+  grid-column: 1 / -1;
+}
 .ml-book-card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: var(--radius-sm); overflow: hidden;
@@ -7094,6 +7098,49 @@ function exportBookPDF(bookId, e) {
   display: flex; align-items: center; justify-content: center;
   line-height: 1;
 }
+/* Séparateurs par année */
+.ml-year-separator {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; gap: 14px;
+  margin: 28px 0 10px;
+  width: 100%;
+}
+.ml-year-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 3px;
+  color: var(--text-muted); text-transform: uppercase;
+  white-space: nowrap; padding: 0 4px;
+  position: relative;
+}
+.ml-year-separator::before,
+.ml-year-separator::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.ml-year-subgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+  grid-column: 1 / -1;
+}
+/* Boutons action dans la DA du site */
+.ml-action-row {
+  display: flex; gap: 5px; padding: 6px 8px 8px;
+  border-top: 1px solid var(--border);
+}
+.ml-action-btn {
+  flex: 1; padding: 5px 4px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px; background: var(--bg2);
+  font-family: 'Jost', sans-serif; font-size: 10px;
+  font-weight: 500; color: var(--text-muted);
+  cursor: pointer; transition: all 0.18s;
+  white-space: nowrap; text-align: center;
+  line-height: 1.2;
+}
+.ml-action-btn:hover { border-color: var(--pink); color: var(--pink-deep); background: var(--pink-light); }
+.ml-btn-resume { border-color: var(--pink-light); color: var(--pink-deep); }
+.ml-btn-link { }
 /* Coups de cœur */
 .ml-coeur-section { margin-bottom: 32px; }
 .ml-coeur-title {
@@ -7532,6 +7579,20 @@ function renderMesLectures(allBooks) {
     });
   }
 
+  // ── Auto-coeur : livres 4-5 étoiles de 2026 pas encore coeur ──
+  const autoCoeur2026 = grBooks.filter(b => {
+    const r = parseInt(b.rating) || 0;
+    if (r < 4) return false;
+    if (coeurIds.has(String(b.id))) return false; // déjà dedans
+    try { return b.dateRead && new Date(b.dateRead).getFullYear() === 2026; } catch { return false; }
+  });
+  if (autoCoeur2026.length) {
+    const newIds = [...(_cache.coeursManuel || []).map(String)];
+    autoCoeur2026.forEach(b => { if (!newIds.includes(String(b.id))) newIds.push(String(b.id)); });
+    saveCoeursManuel(newIds).catch(console.error);
+    autoCoeur2026.forEach(b => coeurIds.add(String(b.id)));
+  }
+
   // ── Filtrage principal ──
   let filtered = grBooks;
   if (_mlFilter === 'year') filtered = lusCetteAnnee;
@@ -7554,7 +7615,33 @@ function renderMesLectures(allBooks) {
     return db_ - da;
   });
 
+  // ── Rendu avec séparateurs par année ──
+  const useYearSeparators = (_mlFilter === 'all' || _mlFilter === 'year');
+  let currentYear = null;
+
   filtered.forEach(book => {
+    // Séparateur année
+    if (useYearSeparators) {
+      let bookYear = null;
+      if (book.dateRead) {
+        try { bookYear = new Date(book.dateRead).getFullYear(); } catch {}
+      }
+      if (bookYear !== currentYear) {
+        currentYear = bookYear;
+        // Fermer la grille précédente
+        const prevGrid = grid.querySelector('.ml-year-subgrid:last-of-type');
+        // Insérer le séparateur
+        const sep = document.createElement('div');
+        sep.className = 'ml-year-separator';
+        sep.innerHTML = `<span class="ml-year-label">${bookYear || '—'}</span>`;
+        grid.appendChild(sep);
+        // Nouvelle sous-grille
+        const subGrid = document.createElement('div');
+        subGrid.className = 'ml-year-subgrid';
+        grid.appendChild(subGrid);
+      }
+    }
+
     const card = document.createElement('div');
     const hasResume = !!(book.summary || book.resume);
     const isCoeur = coeurIds.has(String(book.id));
@@ -7580,16 +7667,17 @@ function renderMesLectures(allBooks) {
       pageCount: book.pageCount || book.pages || ''
     }).replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
-    // Boutons d'action selon état
+    // Boutons d'action selon état — DA du site
     let actionBtn = '';
     if (hasResume) {
-      actionBtn = `<button class="ml-add-resume-btn" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">✏️ Modifier</button>`;
+      actionBtn = `<div class="ml-action-row"><button class="ml-action-btn ml-btn-resume" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">✏️ Résumé</button></div>`;
     } else if (book.linkedFromGoodreads) {
-      actionBtn = `<button class="ml-add-resume-btn" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">+ Résumé</button>`;
+      actionBtn = `<div class="ml-action-row"><button class="ml-action-btn ml-btn-resume" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">+ Résumé</button></div>`;
     } else {
-      actionBtn = `
-        <button class="ml-add-resume-btn ml-btn-new" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}" style="bottom:38px;">+ Résumé</button>
-        <button class="ml-add-resume-btn ml-btn-link" onclick="event.stopPropagation();openLinkModal(JSON.parse(this.dataset.book))" data-book="${bookMini}">🔗 Lier</button>`;
+      actionBtn = `<div class="ml-action-row">
+        <button class="ml-action-btn ml-btn-resume" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">+ Résumé</button>
+        <button class="ml-action-btn ml-btn-link" onclick="event.stopPropagation();openLinkModal(JSON.parse(this.dataset.book))" data-book="${bookMini}">🔗 Lier</button>
+      </div>`;
     }
 
     card.innerHTML = `
@@ -7606,7 +7694,15 @@ function renderMesLectures(allBooks) {
       </div>
       ${actionBtn}
     `;
-    grid.appendChild(card);
+
+    // Ajouter dans la sous-grille ou directement
+    if (useYearSeparators) {
+      const subGrid = grid.querySelector('.ml-year-subgrid:last-of-type');
+      if (subGrid) subGrid.appendChild(card);
+      else grid.appendChild(card);
+    } else {
+      grid.appendChild(card);
+    }
   });
 }
 // Hook dans showSection pour rafraîchir à l'ouverture
