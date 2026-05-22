@@ -7097,16 +7097,38 @@ function exportBookPDF(bookId, e) {
   line-height: 1;
 }
 /* Coups de cœur */
-.ml-coeur-section { margin-bottom: 32px; }
+.ml-coeur-section {
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, rgba(var(--pink-rgb, 212,120,156),0.07) 0%, transparent 60%);
+  border: 1px solid var(--pink);
+  border-radius: 18px;
+  padding: 20px 20px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.ml-coeur-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: coeur-shimmer 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes coeur-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 .ml-coeur-title {
   font-family: 'Playfair Display', serif;
-  font-size: 18px; font-weight: 700; color: var(--text);
+  font-size: 18px; font-weight: 700;
+  color: var(--pink-deep);
   margin-bottom: 14px;
   display: flex; align-items: center; gap: 10px;
+  text-shadow: 0 0 20px rgba(212,120,156,0.3);
 }
 .ml-coeur-title::after {
   content: ''; flex: 1; height: 1px;
-  background: linear-gradient(90deg, var(--border), transparent);
+  background: linear-gradient(90deg, var(--pink), transparent);
 }
 .ml-coeur-grid {
   display: grid;
@@ -7116,10 +7138,14 @@ function exportBookPDF(bookId, e) {
 .ml-coeur-card {
   background: var(--card); border: 1.5px solid var(--pink);
   border-radius: var(--radius-sm); overflow: hidden;
-  box-shadow: 0 2px 12px rgba(212,120,156,0.18);
+  box-shadow: 0 2px 14px rgba(212,120,156,0.22), 0 0 0 0 rgba(212,120,156,0);
   transition: all 0.22s; position: relative;
 }
-.ml-coeur-card:hover { box-shadow: 0 6px 20px rgba(212,120,156,0.32); transform: translateY(-3px); }
+.ml-coeur-card:hover {
+  box-shadow: 0 8px 28px rgba(212,120,156,0.40), 0 0 16px rgba(212,120,156,0.15);
+  transform: translateY(-4px);
+  border-color: var(--pink-deep);
+}
 .ml-coeur-badge {
   position: absolute; top: 6px; left: 6px;
   background: var(--pink); color: white;
