@@ -2885,11 +2885,22 @@ footer:hover {
     <button class="ml-filter-btn" data-ml-filter="year" onclick="setMlFilter('year',this)">📅 Lus en 2026</button>
     <button class="ml-filter-btn" data-ml-filter="encours" onclick="setMlFilter('encours',this)">📖 En cours</button>
     <button class="ml-filter-btn" data-ml-filter="toread" onclick="setMlFilter('toread',this)">🔖 À lire</button>
+    <button class="ml-filter-btn" data-ml-filter="coeur" onclick="setMlFilter('coeur',this)">💛 Coups de cœur</button>
   </div>
   <!-- Grille -->
   <div class="ml-grid" id="ml-grid"></div>
 </div>
 <!-- FIN MES LECTURES -->
+<!-- MODAL LIER LIVRE GR À RÉSUMÉ -->
+<div class="link-modal-overlay" id="link-modal" onclick="if(event.target===this)closeLinkModal()">
+  <div class="link-modal-box">
+    <div class="link-modal-title">🔗 Lier à un résumé existant</div>
+    <div class="link-modal-sub">Choisis le résumé que tu as déjà créé pour ce livre. Les infos Goodreads (note, statut, date) seront fusionnées dedans.</div>
+    <input class="link-modal-search" id="link-modal-search" type="text" placeholder="Chercher par titre ou auteur…" oninput="filterLinkList(this.value)">
+    <div class="link-modal-list" id="link-modal-list"></div>
+    <button class="link-modal-cancel" onclick="closeLinkModal()">Annuler</button>
+  </div>
+</div>
 </main>
 <!-- SHARE POSTER MODAL -->
 <div class="modal-overlay" id="share-modal" onclick="closeShareOutside(event)">
@@ -4782,7 +4793,10 @@ async function init() {
     _cache.seriesView    = viewPrefsVal.seriesView;
     _cache.sagaMeta      = allSagaMetaKeys;
 
-    // lib-state
+    // Load coeurs manuels
+  initCoeursManuel().catch(console.error);
+
+  // lib-state
     if (libStateVal) {
       libState.items = libStateVal.items || [];
       libState.decos = libStateVal.decos || [];
@@ -6986,7 +7000,78 @@ function exportBookPDF(bookId, e) {
   font-style: italic; font-size: 15px;
 }
 .ml-book-card { position: relative; }
-.ml-add-resume-btn {
+.ml-coeur-toggle {
+  position: absolute; top: 6px; left: 6px; z-index: 3;
+  background: rgba(255,255,255,0.85); border: none; border-radius: 50%;
+  width: 26px; height: 26px; font-size: 14px; line-height: 1;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.2s, transform 0.15s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  padding: 0;
+}
+.ml-book-card:hover .ml-coeur-toggle { opacity: 1; }
+.ml-coeur-toggle.active { opacity: 1; }
+.ml-coeur-toggle:hover { transform: scale(1.2); }
+.ml-coeur-remove {
+  position: absolute; top: 6px; right: 6px; z-index: 3;
+  background: rgba(255,255,255,0.9); border: none; border-radius: 50%;
+  width: 22px; height: 22px; font-size: 14px; line-height: 1;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); font-weight: 700;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  padding: 0; transition: color 0.15s, background 0.15s;
+}
+.ml-coeur-remove:hover { color: var(--rose); background: white; }
+/* Link modal */
+.link-modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(74,45,60,0.5); backdrop-filter: blur(4px);
+  z-index: 3000; align-items: center; justify-content: center; padding: 20px;
+}
+.link-modal-overlay.open { display: flex; }
+.link-modal-box {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 28px 24px 20px;
+  width: 100%; max-width: 400px;
+  box-shadow: 0 20px 60px rgba(100,40,70,0.2);
+  animation: modalIn 0.25s ease;
+  display: flex; flex-direction: column; gap: 0;
+  max-height: 80vh;
+}
+.link-modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 700; color: var(--text);
+  margin-bottom: 4px;
+}
+.link-modal-sub {
+  font-size: 12px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;
+}
+.link-modal-search {
+  border: 1.5px solid var(--border); border-radius: 12px;
+  padding: 9px 14px; font-family: 'Jost', sans-serif; font-size: 13px;
+  color: var(--text); background: var(--bg2); outline: none;
+  margin-bottom: 12px; transition: border-color 0.2s; width: 100%; box-sizing: border-box;
+}
+.link-modal-search:focus { border-color: var(--pink); }
+.link-modal-list {
+  overflow-y: auto; max-height: 320px; border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.link-modal-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; cursor: pointer; transition: background 0.15s;
+  border-bottom: 1px solid var(--border);
+}
+.link-modal-item:last-child { border-bottom: none; }
+.link-modal-item:hover { background: var(--pink-light); }
+.link-modal-cancel {
+  margin-top: 14px; width: 100%; padding: 9px;
+  border: 1px solid var(--border2); border-radius: 10px;
+  background: transparent; color: var(--text-dim);
+  font-family: 'Jost', sans-serif; font-size: 13px;
+  cursor: pointer; transition: background 0.2s;
+}
+.link-modal-cancel:hover { background: var(--bg2); }
   position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
   background: var(--pink-deep); color: white;
   border: none; border-radius: 12px;
@@ -7399,38 +7484,11 @@ function setMlFilter(filter, btn) {
   renderMesLectures(sessionBooks || []);
 }
 
-function openAddResumeForBook(book) {
-  // Vider le formulaire d'abord
-  clearForm();
-  // Pré-remplir
-  const setVal = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
-  setVal('new-title', book.title || '');
-  setVal('new-author', book.author || '');
-  setVal('new-series', book.series || '');
-  // Couverture
-  const coverUrl = book.cover || book.coverUrl || '';
-  if (coverUrl) {
-    setVal('new-cover-url', coverUrl);
-    selectedCoverUrl = coverUrl;
-    const img = document.getElementById('cover-preview-img');
-    const preview = document.getElementById('cover-selected-preview');
-    if (img) img.src = coverUrl;
-    if (preview) preview.style.display = 'flex';
-  }
-  // Pages si dispo
-  if (book.pageCount) setVal('new-pages', book.pageCount);
-  // Naviguer vers le formulaire
-  showSection('add-section', document.querySelector('[data-section="add-section"]'));
-  // Scroll en haut
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-window.openAddResumeForBook = openAddResumeForBook;
-
 function renderMesLectures(allBooks) {
-  const grBooks = allBooks.filter(b => b.syncedFromGoodreads === true);
+  const grBooks = allBooks.filter(b => b.syncedFromGoodreads === true || b.linkedFromGoodreads === true);
   const YEAR = 2026;
+  const coeurIds = new Set((_cache.coeursManuel || []).map(String));
 
-  // Stats
   const lusCetteAnnee = grBooks.filter(b => {
     if (!b.dateRead) return false;
     try { return new Date(b.dateRead).getFullYear() === YEAR; } catch { return false; }
@@ -7439,7 +7497,6 @@ function renderMesLectures(allBooks) {
   const aLire   = grBooks.filter(b => b.status === 'to-read' || b.status === 'à lire');
   const pagesAnnee = lusCetteAnnee.reduce((s, b) => s + (parseInt(b.pageCount) || parseInt(b.pages) || 280), 0);
 
-  // Stats DOM
   const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
   setEl('ml-stat-total', grBooks.length);
   setEl('ml-stat-year', lusCetteAnnee.length);
@@ -7448,31 +7505,29 @@ function renderMesLectures(allBooks) {
   const sub = document.getElementById('ml-subtitle');
   if (sub) sub.textContent = `${grBooks.length} livre${grBooks.length > 1 ? 's' : ''} importé${grBooks.length > 1 ? 's' : ''}`;
 
-  // ── Coups de cœur 2026 : 4-5 étoiles, lu en 2026 ──
+  // ── Coups de cœur manuels ──
   const coeursSection = document.getElementById('ml-coeur-section');
   const coeursGrid    = document.getElementById('ml-coeur-grid');
-  const coeurs = lusCetteAnnee.filter(b => parseInt(b.rating) >= 4)
-    .sort((a, b) => (parseInt(b.rating) || 0) - (parseInt(a.rating) || 0));
+  const coeurs = allBooks.filter(b => coeurIds.has(String(b.id)));
   if (coeursSection && coeursGrid) {
     coeursSection.style.display = coeurs.length ? '' : 'none';
     coeursGrid.innerHTML = '';
     coeurs.forEach(book => {
       const coverUrl = book.cover || book.coverUrl || '';
       const rating = parseInt(book.rating) || 0;
-      const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+      const stars = rating > 0 ? '★'.repeat(rating) + '☆'.repeat(5 - rating) : '';
       const card = document.createElement('div');
       card.className = 'ml-coeur-card';
       card.innerHTML = `
-        <span class="ml-coeur-badge">${rating === 5 ? '✨ 5★' : '💛 4★'}</span>
+        <button class="ml-coeur-remove" title="Retirer" onclick="event.stopPropagation();toggleCoeur('${book.id}')">×</button>
         ${coverUrl
           ? `<img class="ml-book-cover" src="${coverUrl}" alt="${book.title}" loading="lazy" onerror="this.outerHTML='<div class=\\'ml-book-cover-placeholder\\'>📖</div>'">`
           : `<div class="ml-book-cover-placeholder">📖</div>`}
         <div class="ml-book-info">
           <div class="ml-book-title">${book.title || ''}</div>
           <div class="ml-book-author">${book.author || ''}</div>
-          <div class="ml-book-stars">${stars}</div>
-        </div>
-      `;
+          ${stars ? `<div class="ml-book-stars">${stars}</div>` : ''}
+        </div>`;
       coeursGrid.appendChild(card);
     });
   }
@@ -7482,8 +7537,8 @@ function renderMesLectures(allBooks) {
   if (_mlFilter === 'year') filtered = lusCetteAnnee;
   else if (_mlFilter === 'encours') filtered = enCours;
   else if (_mlFilter === 'toread') filtered = aLire;
+  else if (_mlFilter === 'coeur') filtered = allBooks.filter(b => coeurIds.has(String(b.id)));
 
-  // Rendu grille
   const grid = document.getElementById('ml-grid');
   if (!grid) return;
   grid.innerHTML = '';
@@ -7493,7 +7548,6 @@ function renderMesLectures(allBooks) {
     return;
   }
 
-  // Tri : dateRead desc
   filtered = [...filtered].sort((a, b) => {
     const da = a.dateRead ? new Date(a.dateRead) : new Date(0);
     const db_ = b.dateRead ? new Date(b.dateRead) : new Date(0);
@@ -7503,6 +7557,7 @@ function renderMesLectures(allBooks) {
   filtered.forEach(book => {
     const card = document.createElement('div');
     const hasResume = !!(book.summary || book.resume);
+    const isCoeur = coeurIds.has(String(book.id));
     card.className = 'ml-book-card' + (hasResume ? ' has-resume' : '');
 
     const coverUrl = book.cover || book.coverUrl || '';
@@ -7519,13 +7574,29 @@ function renderMesLectures(allBooks) {
     else if (status === 'currently-reading' || status === 'en cours') { statusLabel = '📖 En cours'; statusClass = 'ml-status-encours'; }
     else if (status === 'to-read' || status === 'à lire') { statusLabel = '🔖 À lire'; statusClass = 'ml-status-aLire'; }
 
-    // Sérialise le book pour le passer au onclick sans références circulaires
-    const bookJson = JSON.stringify({
+    const bookMini = JSON.stringify({
       id: book.id, title: book.title, author: book.author,
-      series: book.series, cover: coverUrl, coverUrl, pageCount: book.pageCount || book.pages || ''
+      series: book.series, cover: coverUrl, coverUrl,
+      pageCount: book.pageCount || book.pages || ''
     }).replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
+    // Boutons d'action selon état
+    let actionBtn = '';
+    if (hasResume) {
+      actionBtn = `<button class="ml-add-resume-btn" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">✏️ Modifier</button>`;
+    } else if (book.linkedFromGoodreads) {
+      actionBtn = `<button class="ml-add-resume-btn" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}">+ Résumé</button>`;
+    } else {
+      actionBtn = `
+        <button class="ml-add-resume-btn ml-btn-new" onclick="openAddResumeForBook(JSON.parse(this.dataset.book))" data-book="${bookMini}" style="bottom:38px;">+ Résumé</button>
+        <button class="ml-add-resume-btn ml-btn-link" onclick="event.stopPropagation();openLinkModal(JSON.parse(this.dataset.book))" data-book="${bookMini}">🔗 Lier</button>`;
+    }
+
     card.innerHTML = `
+      <button class="ml-coeur-toggle ${isCoeur ? 'active' : ''}" title="${isCoeur ? 'Retirer des coups de cœur' : 'Coup de cœur'}"
+        onclick="event.stopPropagation();toggleCoeur('${book.id}')">
+        ${isCoeur ? '💛' : '🤍'}
+      </button>
       ${coverHtml}
       <div class="ml-book-info">
         <div class="ml-book-title">${book.title || ''}</div>
@@ -7533,17 +7604,11 @@ function renderMesLectures(allBooks) {
         ${stars ? `<div class="ml-book-stars">${stars}</div>` : ''}
         ${statusLabel ? `<span class="ml-book-status ${statusClass}">${statusLabel}</span>` : ''}
       </div>
-      <button class="ml-add-resume-btn" title="Ajouter un résumé"
-        onclick="openAddResumeForBook(JSON.parse(this.dataset.book))"
-        data-book="${bookJson}">
-        ${hasResume ? '✏️ Modifier résumé' : '+ Ajouter résumé'}
-      </button>
+      ${actionBtn}
     `;
     grid.appendChild(card);
   });
 }
-
-
 // Hook dans showSection pour rafraîchir à l'ouverture
 
 window.setMlFilter = setMlFilter;
