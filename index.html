@@ -7614,6 +7614,185 @@ function renderMesLectures(allBooks) {
 window.setMlFilter = setMlFilter;
 window.renderMesLectures = renderMesLectures;
 
+// ===== COUPS DE CŒUR =====
+async function initCoeursManuel() {
+  try {
+    const val = await db.get('coeurs-2026');
+    _cache.coeursManuel = val ? (Array.isArray(val) ? val : JSON.parse(val)) : [];
+  } catch(e) {
+    _cache.coeursManuel = [];
+  }
+}
+
+async function saveCoeursManuel(ids) {
+  _cache.coeursManuel = ids;
+  try {
+    await db.set('coeurs-2026', ids);
+  } catch(e) {
+    console.error('Erreur sauvegarde coeurs:', e);
+  }
+}
+
+async function toggleCoeur(bookId) {
+  bookId = String(bookId);
+  let ids = (_cache.coeursManuel || []).map(String);
+  if (ids.includes(bookId)) {
+    ids = ids.filter(id => id !== bookId);
+    showToast('Retiré des coups de cœur');
+  } else {
+    ids.push(bookId);
+    showToast('💛 Ajouté aux coups de cœur !');
+  }
+  await saveCoeursManuel(ids);
+  renderMesLectures(sessionBooks || []);
+}
+window.toggleCoeur = toggleCoeur;
+
+// ===== LIER LIVRE GR À RÉSUMÉ =====
+let _linkingBook = null; // le livre GR en cours de liaison
+
+function openLinkModal(grBook) {
+  _linkingBook = grBook;
+  const overlay = document.getElementById('link-modal');
+  const listEl  = document.getElementById('link-modal-list');
+  const searchEl = document.getElementById('link-modal-search');
+  if (!overlay || !listEl) return;
+  searchEl.value = '';
+  _renderLinkList('');
+  overlay.classList.add('open');
+}
+window.openLinkModal = openLinkModal;
+
+function closeLinkModal() {
+  const overlay = document.getElementById('link-modal');
+  if (overlay) overlay.classList.remove('open');
+  _linkingBook = null;
+}
+window.closeLinkModal = closeLinkModal;
+
+function filterLinkList(q) {
+  _renderLinkList(q);
+}
+window.filterLinkList = filterLinkList;
+
+function _renderLinkList(q) {
+  const listEl = document.getElementById('link-modal-list');
+  if (!listEl) return;
+  const books = (sessionBooks || []).filter(b => !b.syncedFromGoodreads);
+  const lower = (q || '').toLowerCase().trim();
+  const filtered = lower
+    ? books.filter(b =>
+        (b.title  || '').toLowerCase().includes(lower) ||
+        (b.author || '').toLowerCase().includes(lower))
+    : books;
+
+  if (!filtered.length) {
+    listEl.innerHTML = '<div style="padding:16px;text-align:center;color:var(--text-muted);font-size:13px;">Aucun résumé trouvé</div>';
+    return;
+  }
+
+  listEl.innerHTML = filtered.map(b => {
+    const cover = b.coverUrl || b.cover || '';
+    const imgHtml = cover
+      ? `<img src="${cover}" style="width:36px;height:52px;object-fit:cover;border-radius:4px;flex-shrink:0;" onerror="this.style.display='none'">`
+      : `<div style="width:36px;height:52px;background:var(--pink-light);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📖</div>`;
+    return `<div class="link-modal-item" onclick="linkBookToResume(${b.id})">
+      ${imgHtml}
+      <div style="flex:1;min-width:0;">
+        <div style="font-weight:600;font-size:13px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${b.title || ''}</div>
+        ${b.author ? `<div style="font-size:12px;color:var(--text-muted);margin-top:2px;">${b.author}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function linkBookToResume(resumeId) {
+  if (!_linkingBook) return;
+  const grBook = _linkingBook;
+  closeLinkModal();
+
+  try {
+    let books = await loadBooks();
+    // Fusionner les métadonnées GR dans le résumé manuel
+    books = books.map(b => {
+      if (String(b.id) === String(resumeId)) {
+        return {
+          ...b,
+          rating:   grBook.rating   || b.rating,
+          status:   grBook.status   || b.status,
+          dateRead: grBook.dateRead || b.dateRead,
+          cover:    b.coverUrl || b.cover || grBook.cover || '',
+          linkedFromGoodreads: true,
+          goodreadsId: grBook.id,
+        };
+      }
+      return b;
+    });
+    // Supprimer le doublon GR
+    books = books.filter(b => String(b.id) !== String(grBook.id));
+
+    await saveBooks(books);
+    sessionBooks = books;
+    _cache.books = books;
+    renderDynamicSagas(books);
+    renderAllSeries(books);
+    renderHomeCovers(books);
+    updateStats(books);
+    renderMesLectures(books);
+    showToast('✓ Résumé lié ! Les infos Goodreads ont été fusionnées.');
+  } catch(e) {
+    console.error('Erreur liaison:', e);
+    showToast('⚠ Erreur lors de la liaison');
+  }
+}
+window.linkBookToResume = linkBookToResume;
+
+// ===== OUVRIR FORMULAIRE D'AJOUT PRÉ-REMPLI =====
+function openAddResumeForBook(bookMeta) {
+  // Naviguer vers le formulaire d'ajout
+  showSection('add-section', null);
+  // Pré-remplir avec les infos du livre GR
+  setTimeout(() => {
+    const titleEl = document.getElementById('new-title');
+    const authorEl = document.getElementById('new-author');
+    const seriesEl = document.getElementById('new-series');
+    const coverEl  = document.getElementById('new-cover-url');
+    if (titleEl  && bookMeta.title)  titleEl.value  = bookMeta.title;
+    if (authorEl && bookMeta.author) authorEl.value = bookMeta.author;
+    if (seriesEl && bookMeta.series) seriesEl.value = bookMeta.series;
+    if (coverEl  && (bookMeta.cover || bookMeta.coverUrl)) {
+      const url = bookMeta.cover || bookMeta.coverUrl;
+      coverEl.value = url;
+      selectedCoverUrl = url;
+      const preview = document.getElementById('cover-selected-preview');
+      const img = document.getElementById('cover-preview-img');
+      if (preview && img) { img.src = url; preview.style.display = 'flex'; }
+    }
+  }, 150);
+}
+window.openAddResumeForBook = openAddResumeForBook;
+
+// ===== CLICK SUR CARTE MES LECTURES =====
+// Rendre les cartes cliquables pour aller sur la fiche si résumé existant
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.ml-book-card');
+  if (!card) return;
+  // Ne pas déclencher si on a cliqué sur un bouton interne
+  if (e.target.closest('button')) return;
+  // Trouver le titre dans la carte
+  const titleEl = card.querySelector('.ml-book-title');
+  if (!titleEl) return;
+  const title = titleEl.textContent.trim();
+  const book = (sessionBooks || []).find(b =>
+    (b.title || '').trim() === title
+  );
+  if (book && !book.syncedFromGoodreads) {
+    // Livre avec résumé → aller à la saga
+    const sagaId = makeSagaId(book.series || book.title);
+    showSection(sagaId, null);
+  }
+});
+
 </script>
 </body>
 </html>
