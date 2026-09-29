@@ -1,23 +1,23 @@
 {
   "userId": "151708751-radia",
-  "syncedAt": "2026-07-21T23:58:29.293Z",
-  "total": 148,
+  "syncedAt": "2026-09-29T11:28:13.710Z",
+  "total": 155,
   "books": [
     {
-      "id": "250863447",
-      "title": "This Kingdom Will Not Kill Me",
-      "author": "Ilona Andrews",
+      "id": "222855390",
+      "title": "Duskbound",
+      "author": "Bree Grenwich",
       "status": "en cours",
       "rating": null,
-      "dateRead": "2026-06-14",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1775791346l/250863447._SY75_.jpg",
+      "dateRead": "2026-09-27",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1734792988l/222855390._SY75_.jpg",
       "saga": null,
       "description": null,
       "publishedDate": null,
       "pageCount": null,
       "categories": [],
-      "goodreadsUrl": "https://www.goodreads.com/review/show/8421075726?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:28.252Z"
+      "goodreadsUrl": "https://www.goodreads.com/review/show/8974672999?utm_medium=api&utm_source=rss",
+      "syncedAt": "2026-09-29T11:28:13.055Z"
     },
     {
       "id": "243832518",
@@ -33,23 +33,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8257765820?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:28.596Z"
-    },
-    {
-      "id": "83177152",
-      "title": "Glint",
-      "author": "Raven Kennedy",
-      "status": "en cours",
-      "rating": null,
-      "dateRead": "2026-05-09",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1674385833l/83177152._SY75_.jpg",
-      "saga": null,
-      "description": null,
-      "publishedDate": null,
-      "pageCount": null,
-      "categories": [],
-      "goodreadsUrl": "https://www.goodreads.com/review/show/8587410036?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:28.941Z"
+      "syncedAt": "2026-09-29T11:28:13.379Z"
     },
     {
       "id": "223829937",
@@ -65,7 +49,135 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8406631065?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:29.285Z"
+      "syncedAt": "2026-09-29T11:28:13.703Z"
+    },
+    {
+      "id": "218405601",
+      "title": "Riftborne",
+      "author": "Bree Grenwich",
+      "status": "lu",
+      "rating": 2,
+      "dateRead": "2026-09-25",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1725306629l/218405601._SX50_.jpg",
+      "saga": null,
+      "description": null,
+      "publishedDate": null,
+      "pageCount": null,
+      "categories": [],
+      "goodreadsUrl": "https://www.goodreads.com/review/show/8015695749?utm_medium=api&utm_source=rss",
+      "syncedAt": "2026-09-29T11:27:22.100Z"
+    },
+    {
+      "id": "44799982",
+      "title": "The Mindf*ck Series",
+      "author": "S.T. Abby",
+      "status": "lu",
+      "rating": null,
+      "dateRead": "2026-09-11",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1554575415l/44799982._SY75_.jpg",
+      "saga": null,
+      "description": null,
+      "publishedDate": null,
+      "pageCount": null,
+      "categories": [],
+      "goodreadsUrl": "https://www.goodreads.com/review/show/8937333950?utm_medium=api&utm_source=rss",
+      "syncedAt": "2026-09-29T11:27:23.838Z"
+    },
+    {
+      "id": "83177152",
+      "title": "Glint",
+      "author": "Raven Kennedy",
+      "status": "lu",
+      "rating": 2,
+      "dateRead": "2026-09-10",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1674385833l/83177152._SY75_.jpg",
+      "saga": null,
+      "description": null,
+      "publishedDate": null,
+      "pageCount": null,
+      "categories": [],
+      "goodreadsUrl": "https://www.goodreads.com/review/show/8587410036?utm_medium=api&utm_source=rss",
+      "syncedAt": "2026-09-29T11:27:24.200Z"
+    },
+    {
+      "id": "250863447",
+      "title": "This Kingdom Will Not Kill Me",
+      "author": "Ilona Andrews",
+      "status": "lu",
+      "rating": 5,
+      "dateRead": "2026-09-09",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1775791346l/250863447._SY75_.jpg",
+      "saga": null,
+      "description": null,
+      "publishedDate": null,
+      "pageCount": null,
+      "categories": [],
+      "goodreadsUrl": "https://www.goodreads.com/review/show/8421075726?utm_medium=api&utm_source=rss",
+      "syncedAt": "2026-09-29T11:27:24.525Z"
+    },
+    {
+      "id": "250973916",
+      "title": "Fangs with Benefits",
+      "author": "Kath Richards",
+      "status": "lu",
+      "rating": 5,
+      "dateRead": "2026-08-06",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1780290726l/250973916._SY75_.jpg",
+      "saga": null,
+      "description": null,
+      "publishedDate": null,
+      "pageCount": null,
+      "categories": [],
+      "goodreadsUrl": "https://www.goodreads.com/review/show/8577402152?utm_medium=api&utm_source=rss",
+      "syncedAt": "2026-09-29T11:27:24.890Z"
+    },
+    {
+      "id": "252633903",
+      "title": "Harvest Season",
+      "author": "Brynne Weaver",
+      "status": "lu",
+      "rating": 4,
+      "dateRead": "2026-07-31",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1779602844l/252633903._SY75_.jpg",
+      "saga": null,
+      "description": null,
+      "publishedDate": null,
+      "pageCount": null,
+      "categories": [],
+      "goodreadsUrl": "https://www.goodreads.com/review/show/8059073939?utm_medium=api&utm_source=rss",
+      "syncedAt": "2026-09-29T11:27:25.252Z"
+    },
+    {
+      "id": "203812522",
+      "title": "Hamlet",
+      "author": "William Shakespeare",
+      "status": "lu",
+      "rating": 5,
+      "dateRead": "2026-07-26",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1702598078l/203812522._SY75_.jpg",
+      "saga": null,
+      "description": null,
+      "publishedDate": null,
+      "pageCount": null,
+      "categories": [],
+      "goodreadsUrl": "https://www.goodreads.com/review/show/8802735162?utm_medium=api&utm_source=rss",
+      "syncedAt": "2026-09-29T11:27:25.938Z"
+    },
+    {
+      "id": "250508638",
+      "title": "The Dinner Party: A Pick Your Poison Adventure",
+      "author": "Freida McFadden",
+      "status": "lu",
+      "rating": 3,
+      "dateRead": "2026-07-21",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1775058624l/250508638._SY75_.jpg",
+      "saga": null,
+      "description": null,
+      "publishedDate": null,
+      "pageCount": null,
+      "categories": [],
+      "goodreadsUrl": "https://www.goodreads.com/review/show/8788644458?utm_medium=api&utm_source=rss",
+      "syncedAt": "2026-09-29T11:27:25.575Z"
     },
     {
       "id": "252252448",
@@ -81,7 +193,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8787129117?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:37.388Z"
+      "syncedAt": "2026-09-29T11:27:26.263Z"
     },
     {
       "id": "6388990",
@@ -97,7 +209,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8664112538?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:37.738Z"
+      "syncedAt": "2026-09-29T11:27:26.591Z"
     },
     {
       "id": "59980",
@@ -113,7 +225,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8663097426?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:38.081Z"
+      "syncedAt": "2026-09-29T11:27:26.922Z"
     },
     {
       "id": "232477281",
@@ -129,7 +241,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8587791946?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:38.426Z"
+      "syncedAt": "2026-09-29T11:27:27.247Z"
     },
     {
       "id": "65654825",
@@ -145,7 +257,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6489437642?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:38.775Z"
+      "syncedAt": "2026-09-29T11:27:27.607Z"
     },
     {
       "id": "239054631",
@@ -161,7 +273,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8409538778?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:39.116Z"
+      "syncedAt": "2026-09-29T11:27:27.932Z"
     },
     {
       "id": "146943394",
@@ -177,7 +289,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7080993512?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:40.504Z"
+      "syncedAt": "2026-09-29T11:27:29.277Z"
     },
     {
       "id": "239680503",
@@ -193,7 +305,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8494563796?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:40.849Z"
+      "syncedAt": "2026-09-29T11:27:29.600Z"
     },
     {
       "id": "237353858",
@@ -209,7 +321,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8486547985?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:41.198Z"
+      "syncedAt": "2026-09-29T11:27:29.975Z"
     },
     {
       "id": "60001408",
@@ -225,7 +337,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8460566969?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:41.541Z"
+      "syncedAt": "2026-09-29T11:27:30.298Z"
     },
     {
       "id": "242399248",
@@ -241,7 +353,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8156051371?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:41.892Z"
+      "syncedAt": "2026-09-29T11:27:30.623Z"
     },
     {
       "id": "123471760",
@@ -257,7 +369,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6717495494?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:42.237Z"
+      "syncedAt": "2026-09-29T11:27:30.947Z"
     },
     {
       "id": "219876055",
@@ -273,7 +385,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7581090867?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:39.808Z"
+      "syncedAt": "2026-09-29T11:27:28.627Z"
     },
     {
       "id": "241373611",
@@ -289,7 +401,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8362999565?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:43.269Z"
+      "syncedAt": "2026-09-29T11:27:31.997Z"
     },
     {
       "id": "171685085",
@@ -305,7 +417,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8322294252?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:43.613Z"
+      "syncedAt": "2026-09-29T11:27:32.323Z"
     },
     {
       "id": "141275671",
@@ -321,7 +433,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7779408633?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:44.096Z"
+      "syncedAt": "2026-09-29T11:27:32.643Z"
     },
     {
       "id": "202675767",
@@ -337,7 +449,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7722749179?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:44.443Z"
+      "syncedAt": "2026-09-29T11:27:32.966Z"
     },
     {
       "id": "212393364",
@@ -353,7 +465,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8226406490?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:45.136Z"
+      "syncedAt": "2026-09-29T11:27:33.619Z"
     },
     {
       "id": "62792284",
@@ -369,7 +481,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7655716555?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:42.585Z"
+      "syncedAt": "2026-09-29T11:27:31.272Z"
     },
     {
       "id": "207051850",
@@ -385,7 +497,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8228159359?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:45.478Z"
+      "syncedAt": "2026-09-29T11:27:33.979Z"
     },
     {
       "id": "241471819",
@@ -401,7 +513,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8099797451?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:45.826Z"
+      "syncedAt": "2026-09-29T11:27:34.345Z"
     },
     {
       "id": "240583647",
@@ -417,7 +529,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8213329300?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:46.171Z"
+      "syncedAt": "2026-09-29T11:27:34.708Z"
     },
     {
       "id": "241217481",
@@ -433,7 +545,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8208038128?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:46.513Z"
+      "syncedAt": "2026-09-29T11:27:35.030Z"
     },
     {
       "id": "221866459",
@@ -449,7 +561,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7700468048?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:42.928Z"
+      "syncedAt": "2026-09-29T11:27:31.632Z"
     },
     {
       "id": "212174157",
@@ -465,7 +577,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7689974744?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:46.859Z"
+      "syncedAt": "2026-09-29T11:27:35.388Z"
     },
     {
       "id": "240583620",
@@ -481,7 +593,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8201264946?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:47.199Z"
+      "syncedAt": "2026-09-29T11:27:35.713Z"
     },
     {
       "id": "201961382",
@@ -497,7 +609,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7870647486?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:47.545Z"
+      "syncedAt": "2026-09-29T11:27:36.038Z"
     },
     {
       "id": "240583631",
@@ -513,7 +625,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8072527941?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:48.238Z"
+      "syncedAt": "2026-09-29T11:27:36.683Z"
     },
     {
       "id": "32620332",
@@ -529,7 +641,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4750923823?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:49.632Z"
+      "syncedAt": "2026-09-29T11:27:37.692Z"
     },
     {
       "id": "242109300",
@@ -545,7 +657,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/8064608603?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:49.290Z"
+      "syncedAt": "2026-09-29T11:27:37.368Z"
     },
     {
       "id": "231299870",
@@ -561,7 +673,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7703216061?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:49.983Z"
+      "syncedAt": "2026-09-29T11:27:38.016Z"
     },
     {
       "id": "240581511",
@@ -577,7 +689,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7986018574?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:50.328Z"
+      "syncedAt": "2026-09-29T11:27:38.339Z"
     },
     {
       "id": "228256271",
@@ -593,7 +705,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7350797384?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:51.273Z"
+      "syncedAt": "2026-09-29T11:27:39.028Z"
     },
     {
       "id": "242504011",
@@ -609,7 +721,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7994163350?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:53.357Z"
+      "syncedAt": "2026-09-29T11:27:40.329Z"
     },
     {
       "id": "60212115",
@@ -625,7 +737,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6630529607?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:48.587Z"
+      "syncedAt": "2026-09-29T11:27:37.043Z"
     },
     {
       "id": "63945326",
@@ -641,7 +753,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7801218028?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:53.705Z"
+      "syncedAt": "2026-09-29T11:27:40.652Z"
     },
     {
       "id": "188138748",
@@ -657,7 +769,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7850703993?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:54.054Z"
+      "syncedAt": "2026-09-29T11:27:40.975Z"
     },
     {
       "id": "56574777",
@@ -673,7 +785,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7304587402?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:44.785Z"
+      "syncedAt": "2026-09-29T11:27:33.294Z"
     },
     {
       "id": "213779197",
@@ -689,7 +801,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7382243052?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:52.314Z"
+      "syncedAt": "2026-09-29T11:27:40.003Z"
     },
     {
       "id": "228165581",
@@ -705,7 +817,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7704337590?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:54.399Z"
+      "syncedAt": "2026-09-29T11:27:41.298Z"
     },
     {
       "id": "16143347",
@@ -721,7 +833,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7787794695?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:54.748Z"
+      "syncedAt": "2026-09-29T11:27:41.629Z"
     },
     {
       "id": "13537029",
@@ -737,7 +849,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6449658146?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:55.089Z"
+      "syncedAt": "2026-09-29T11:27:41.952Z"
     },
     {
       "id": "219487899",
@@ -753,7 +865,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7316625348?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:55.435Z"
+      "syncedAt": "2026-09-29T11:27:42.275Z"
     },
     {
       "id": "49452335",
@@ -769,7 +881,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7766516873?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:57.961Z"
+      "syncedAt": "2026-09-29T11:27:44.577Z"
     },
     {
       "id": "225088565",
@@ -785,7 +897,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7757652140?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:51.968Z"
+      "syncedAt": "2026-09-29T11:27:39.679Z"
     },
     {
       "id": "58777737",
@@ -801,7 +913,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7655487795?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:58.307Z"
+      "syncedAt": "2026-09-29T11:27:44.934Z"
     },
     {
       "id": "61291687",
@@ -817,7 +929,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5991792527?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:58.653Z"
+      "syncedAt": "2026-09-29T11:27:45.294Z"
     },
     {
       "id": "207297940",
@@ -833,7 +945,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7642724795?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:58.995Z"
+      "syncedAt": "2026-09-29T11:27:45.654Z"
     },
     {
       "id": "122763350",
@@ -849,7 +961,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6726367438?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:59.340Z"
+      "syncedAt": "2026-09-29T11:27:45.980Z"
     },
     {
       "id": "46138995",
@@ -865,7 +977,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7655361309?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:59.687Z"
+      "syncedAt": "2026-09-29T11:27:46.343Z"
     },
     {
       "id": "58777736",
@@ -881,7 +993,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7193232957?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:00.035Z"
+      "syncedAt": "2026-09-29T11:27:46.662Z"
     },
     {
       "id": "227873662",
@@ -897,7 +1009,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7034629057?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:00.380Z"
+      "syncedAt": "2026-09-29T11:27:47.024Z"
     },
     {
       "id": "198404743",
@@ -913,7 +1025,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5529571777?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:57.613Z"
+      "syncedAt": "2026-09-29T11:27:44.248Z"
     },
     {
       "id": "223361708",
@@ -929,7 +1041,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7530408544?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:00.726Z"
+      "syncedAt": "2026-09-29T11:27:47.344Z"
     },
     {
       "id": "57091326",
@@ -945,7 +1057,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7499690176?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:01.073Z"
+      "syncedAt": "2026-09-29T11:27:47.666Z"
     },
     {
       "id": "223761781",
@@ -961,7 +1073,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6762754550?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:01.419Z"
+      "syncedAt": "2026-09-29T11:27:47.986Z"
     },
     {
       "id": "27883214",
@@ -977,7 +1089,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4818133103?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:56.468Z"
+      "syncedAt": "2026-09-29T11:27:43.258Z"
     },
     {
       "id": "213798776",
@@ -993,7 +1105,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7267450619?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:01.765Z"
+      "syncedAt": "2026-09-29T11:27:48.309Z"
     },
     {
       "id": "59708060",
@@ -1009,7 +1121,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7078405075?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:02.114Z"
+      "syncedAt": "2026-09-29T11:27:48.632Z"
     },
     {
       "id": "219400991",
@@ -1025,7 +1137,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6891350699?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:03.158Z"
+      "syncedAt": "2026-09-29T11:27:49.599Z"
     },
     {
       "id": "195847873",
@@ -1041,7 +1153,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5776510961?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:56.124Z"
+      "syncedAt": "2026-09-29T11:27:42.926Z"
     },
     {
       "id": "168199278",
@@ -1057,7 +1169,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7080993705?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:02.809Z"
+      "syncedAt": "2026-09-29T11:27:49.280Z"
     },
     {
       "id": "209668781",
@@ -1073,7 +1185,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6856381441?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:03.508Z"
+      "syncedAt": "2026-09-29T11:27:49.958Z"
     },
     {
       "id": "211200239",
@@ -1089,7 +1201,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7259166654?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:04.337Z"
+      "syncedAt": "2026-09-29T11:27:50.644Z"
     },
     {
       "id": "52394480",
@@ -1105,7 +1217,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6700153507?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:04.682Z"
+      "syncedAt": "2026-09-29T11:27:50.967Z"
     },
     {
       "id": "220389090",
@@ -1121,7 +1233,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7080950914?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:05.026Z"
+      "syncedAt": "2026-09-29T11:27:51.288Z"
     },
     {
       "id": "220389458",
@@ -1137,7 +1249,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/7062453579?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:05.429Z"
+      "syncedAt": "2026-09-29T11:27:51.650Z"
     },
     {
       "id": "58527403",
@@ -1153,7 +1265,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5718346385?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:06.119Z"
+      "syncedAt": "2026-09-29T11:27:52.307Z"
     },
     {
       "id": "218215726",
@@ -1169,7 +1281,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6719220810?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:50.816Z"
+      "syncedAt": "2026-09-29T11:27:38.705Z"
     },
     {
       "id": "205009335",
@@ -1185,7 +1297,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4756373282?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:06.463Z"
+      "syncedAt": "2026-09-29T11:27:52.630Z"
     },
     {
       "id": "206119243",
@@ -1201,7 +1313,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6904112867?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:02.458Z"
+      "syncedAt": "2026-09-29T11:27:48.956Z"
     },
     {
       "id": "211083851",
@@ -1217,7 +1329,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6641822540?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:06.808Z"
+      "syncedAt": "2026-09-29T11:27:52.963Z"
     },
     {
       "id": "181344829",
@@ -1233,7 +1345,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6738334495?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:05.775Z"
+      "syncedAt": "2026-09-29T11:27:51.978Z"
     },
     {
       "id": "212488615",
@@ -1249,7 +1361,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6853459741?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:07.148Z"
+      "syncedAt": "2026-09-29T11:27:53.283Z"
     },
     {
       "id": "42595182",
@@ -1265,7 +1377,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6853456178?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:07.490Z"
+      "syncedAt": "2026-09-29T11:27:53.606Z"
     },
     {
       "id": "62630160",
@@ -1281,7 +1393,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6726367901?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:08.177Z"
+      "syncedAt": "2026-09-29T11:27:54.291Z"
     },
     {
       "id": "57599014",
@@ -1297,7 +1409,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6739751931?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:09.214Z"
+      "syncedAt": "2026-09-29T11:27:55.300Z"
     },
     {
       "id": "36539841",
@@ -1313,7 +1425,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6820361088?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:09.560Z"
+      "syncedAt": "2026-09-29T11:27:55.624Z"
     },
     {
       "id": "18053135",
@@ -1329,7 +1441,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6834652388?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:07.835Z"
+      "syncedAt": "2026-09-29T11:27:53.966Z"
     },
     {
       "id": "215966295",
@@ -1345,7 +1457,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6820489985?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:39.462Z"
+      "syncedAt": "2026-09-29T11:27:28.257Z"
     },
     {
       "id": "34211633",
@@ -1361,7 +1473,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5727266842?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:09.909Z"
+      "syncedAt": "2026-09-29T11:27:55.986Z"
     },
     {
       "id": "17331518",
@@ -1377,7 +1489,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6803603485?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:10.253Z"
+      "syncedAt": "2026-09-29T11:27:56.311Z"
     },
     {
       "id": "38094553",
@@ -1393,7 +1505,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4779270026?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:10.598Z"
+      "syncedAt": "2026-09-29T11:27:56.635Z"
     },
     {
       "id": "209982006",
@@ -1409,7 +1521,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6244243860?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:10.943Z"
+      "syncedAt": "2026-09-29T11:27:56.961Z"
     },
     {
       "id": "62949650",
@@ -1425,7 +1537,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6233928217?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:11.290Z"
+      "syncedAt": "2026-09-29T11:27:57.285Z"
     },
     {
       "id": "216310993",
@@ -1441,7 +1553,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6258276769?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:12.044Z"
+      "syncedAt": "2026-09-29T11:27:57.933Z"
     },
     {
       "id": "152928786",
@@ -1457,7 +1569,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6630915626?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:08.523Z"
+      "syncedAt": "2026-09-29T11:27:54.614Z"
     },
     {
       "id": "25222260",
@@ -1473,7 +1585,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5860047117?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:12.391Z"
+      "syncedAt": "2026-09-29T11:27:58.257Z"
     },
     {
       "id": "205009231",
@@ -1489,7 +1601,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5742681336?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:12.733Z"
+      "syncedAt": "2026-09-29T11:27:58.580Z"
     },
     {
       "id": "148573502",
@@ -1505,7 +1617,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6430302285?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:13.081Z"
+      "syncedAt": "2026-09-29T11:27:58.902Z"
     },
     {
       "id": "147698253",
@@ -1521,7 +1633,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6401148706?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:08.866Z"
+      "syncedAt": "2026-09-29T11:27:54.938Z"
     },
     {
       "id": "199212614",
@@ -1537,7 +1649,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6475181628?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:13.426Z"
+      "syncedAt": "2026-09-29T11:27:59.222Z"
     },
     {
       "id": "59534603",
@@ -1553,7 +1665,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4756373005?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:13.775Z"
+      "syncedAt": "2026-09-29T11:27:59.541Z"
     },
     {
       "id": "199400410",
@@ -1569,7 +1681,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5718346595?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:14.116Z"
+      "syncedAt": "2026-09-29T11:27:59.896Z"
     },
     {
       "id": "148571922",
@@ -1585,7 +1697,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6350906825?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:55.776Z"
+      "syncedAt": "2026-09-29T11:27:42.602Z"
     },
     {
       "id": "61432272",
@@ -1601,7 +1713,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6400992329?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:14.456Z"
+      "syncedAt": "2026-09-29T11:28:00.220Z"
     },
     {
       "id": "72042950",
@@ -1617,7 +1729,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6346560253?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:14.797Z"
+      "syncedAt": "2026-09-29T11:28:00.543Z"
     },
     {
       "id": "71837092",
@@ -1633,7 +1745,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6340719940?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:15.140Z"
+      "syncedAt": "2026-09-29T11:28:00.867Z"
     },
     {
       "id": "430569",
@@ -1649,7 +1761,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4750923617?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:15.829Z"
+      "syncedAt": "2026-09-29T11:28:01.227Z"
     },
     {
       "id": "187607201",
@@ -1665,7 +1777,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6245581054?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:16.178Z"
+      "syncedAt": "2026-09-29T11:28:01.548Z"
     },
     {
       "id": "199020721",
@@ -1681,7 +1793,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6008765932?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:16.528Z"
+      "syncedAt": "2026-09-29T11:28:01.905Z"
     },
     {
       "id": "148570244",
@@ -1697,7 +1809,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5948452702?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:17.218Z"
+      "syncedAt": "2026-09-29T11:28:02.558Z"
     },
     {
       "id": "62949649",
@@ -1713,7 +1825,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6224650080?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:16.867Z"
+      "syncedAt": "2026-09-29T11:28:02.231Z"
     },
     {
       "id": "62949648",
@@ -1729,7 +1841,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5744021032?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:56.810Z"
+      "syncedAt": "2026-09-29T11:27:43.589Z"
     },
     {
       "id": "41079282",
@@ -1745,7 +1857,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6001691146?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:57.154Z"
+      "syncedAt": "2026-09-29T11:27:43.923Z"
     },
     {
       "id": "188315583",
@@ -1761,7 +1873,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6030368889?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:47.892Z"
+      "syncedAt": "2026-09-29T11:27:36.359Z"
     },
     {
       "id": "121491725",
@@ -1777,7 +1889,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/6000685785?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:11.641Z"
+      "syncedAt": "2026-09-29T11:27:57.610Z"
     },
     {
       "id": "57913029",
@@ -1793,7 +1905,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4756375691?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:18.261Z"
+      "syncedAt": "2026-09-29T11:28:03.533Z"
     },
     {
       "id": "179859232",
@@ -1809,7 +1921,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5961611631?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:18.607Z"
+      "syncedAt": "2026-09-29T11:28:03.857Z"
     },
     {
       "id": "62057697",
@@ -1825,7 +1937,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4818118293?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:51.623Z"
+      "syncedAt": "2026-09-29T11:27:39.355Z"
     },
     {
       "id": "62598267",
@@ -1841,7 +1953,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5961588924?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:40.157Z"
+      "syncedAt": "2026-09-29T11:27:28.952Z"
     },
     {
       "id": "178322870",
@@ -1857,7 +1969,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4756389097?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:19.303Z"
+      "syncedAt": "2026-09-29T11:28:04.549Z"
     },
     {
       "id": "123846615",
@@ -1873,7 +1985,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5937715234?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:18.956Z"
+      "syncedAt": "2026-09-29T11:28:04.185Z"
     },
     {
       "id": "77213890",
@@ -1889,7 +2001,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4767298389?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:19.647Z"
+      "syncedAt": "2026-09-29T11:28:04.912Z"
     },
     {
       "id": "59494202",
@@ -1905,7 +2017,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5910282632?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:19.997Z"
+      "syncedAt": "2026-09-29T11:28:05.237Z"
     },
     {
       "id": "163557788",
@@ -1921,7 +2033,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5866954256?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:20.337Z"
+      "syncedAt": "2026-09-29T11:28:05.559Z"
     },
     {
       "id": "135981091",
@@ -1937,7 +2049,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5795540686?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:20.683Z"
+      "syncedAt": "2026-09-29T11:28:05.882Z"
     },
     {
       "id": "125571675",
@@ -1953,39 +2065,39 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5718346230?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:21.031Z"
+      "syncedAt": "2026-09-29T11:28:06.205Z"
     },
     {
-      "id": "60546028",
+      "id": "33361549",
       "title": "Paint It All Red",
       "author": "S.T. Abby",
       "status": "lu",
       "rating": 5,
       "dateRead": "2023-09-04",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1646371114l/60546028._SY75_.jpg",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1760641948l/33361549._SY75_.jpg",
       "saga": null,
       "description": null,
       "publishedDate": null,
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5810561413?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:15.480Z"
+      "syncedAt": "2026-09-29T11:27:23.514Z"
     },
     {
-      "id": "60546023",
+      "id": "33361546",
       "title": "All the Lies",
       "author": "S.T. Abby",
       "status": "lu",
       "rating": 5,
       "dateRead": "2023-08-31",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1646371196l/60546023._SY75_.jpg",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1760641955l/33361546._SY75_.jpg",
       "saga": null,
       "description": null,
       "publishedDate": null,
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5796031187?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:48.940Z"
+      "syncedAt": "2026-09-29T11:27:23.188Z"
     },
     {
       "id": "63228005",
@@ -2001,23 +2113,23 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5776000493?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:22.066Z"
+      "syncedAt": "2026-09-29T11:28:07.259Z"
     },
     {
-      "id": "60546016",
+      "id": "33304878",
       "title": "Scarlet Angel",
       "author": "S.T. Abby",
       "status": "lu",
       "rating": 5,
       "dateRead": "2023-08-22",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1646371036l/60546016._SY75_.jpg",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1760641951l/33304878._SY75_.jpg",
       "saga": null,
       "description": null,
       "publishedDate": null,
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5782087911?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:52.662Z"
+      "syncedAt": "2026-09-29T11:27:22.827Z"
     },
     {
       "id": "61197096",
@@ -2033,7 +2145,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5775999046?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:21.380Z"
+      "syncedAt": "2026-09-29T11:28:06.566Z"
     },
     {
       "id": "60546007",
@@ -2049,7 +2161,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5740555377?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:17.908Z"
+      "syncedAt": "2026-09-29T11:28:03.205Z"
     },
     {
       "id": "61229026",
@@ -2065,7 +2177,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5749973755?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:22.751Z"
+      "syncedAt": "2026-09-29T11:28:07.904Z"
     },
     {
       "id": "62098066",
@@ -2081,23 +2193,23 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4750923443?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:23.438Z"
+      "syncedAt": "2026-09-29T11:28:08.558Z"
     },
     {
-      "id": "60545137",
+      "id": "33131867",
       "title": "The Risk",
       "author": "S.T. Abby",
       "status": "lu",
       "rating": 5,
       "dateRead": "2023-08-03",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1646358445l/60545137._SY75_.jpg",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1760641915l/33131867._SY75_.jpg",
       "saga": null,
       "description": null,
       "publishedDate": null,
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4880904034?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:57:53.015Z"
+      "syncedAt": "2026-09-29T11:27:22.463Z"
     },
     {
       "id": "140007973",
@@ -2113,7 +2225,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5669441747?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:23.782Z"
+      "syncedAt": "2026-09-29T11:28:08.878Z"
     },
     {
       "id": "63332974",
@@ -2129,7 +2241,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5687482780?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:24.469Z"
+      "syncedAt": "2026-09-29T11:28:09.525Z"
     },
     {
       "id": "63125083",
@@ -2145,7 +2257,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4750923450?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:23.094Z"
+      "syncedAt": "2026-09-29T11:28:08.228Z"
     },
     {
       "id": "13623150",
@@ -2161,7 +2273,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5378960813?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:25.154Z"
+      "syncedAt": "2026-09-29T11:28:10.170Z"
     },
     {
       "id": "32735146",
@@ -2177,7 +2289,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4755495631?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:17.562Z"
+      "syncedAt": "2026-09-29T11:28:02.882Z"
     },
     {
       "id": "58025223",
@@ -2193,7 +2305,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4779269748?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:03.993Z"
+      "syncedAt": "2026-09-29T11:27:50.319Z"
     },
     {
       "id": "62617091",
@@ -2209,7 +2321,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/5171306750?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:25.495Z"
+      "syncedAt": "2026-09-29T11:28:10.492Z"
     },
     {
       "id": "61295389",
@@ -2225,7 +2337,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4816905982?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:26.187Z"
+      "syncedAt": "2026-09-29T11:28:11.137Z"
     },
     {
       "id": "60893783",
@@ -2241,7 +2353,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4776326424?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:22.407Z"
+      "syncedAt": "2026-09-29T11:28:07.583Z"
     },
     {
       "id": "34707823",
@@ -2257,7 +2369,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4750923975?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:24.813Z"
+      "syncedAt": "2026-09-29T11:28:09.847Z"
     },
     {
       "id": "60160231",
@@ -2273,7 +2385,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4822725124?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:25.839Z"
+      "syncedAt": "2026-09-29T11:28:10.816Z"
     },
     {
       "id": "60802650",
@@ -2289,7 +2401,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4816785905?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:24.120Z"
+      "syncedAt": "2026-09-29T11:28:09.203Z"
     },
     {
       "id": "61216048",
@@ -2305,7 +2417,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4801589572?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:27.678Z"
+      "syncedAt": "2026-09-29T11:28:12.472Z"
     },
     {
       "id": "33516945",
@@ -2321,7 +2433,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4768560807?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:21.724Z"
+      "syncedAt": "2026-09-29T11:28:06.896Z"
     },
     {
       "id": "23655061",
@@ -2337,7 +2449,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4750925748?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:26.993Z"
+      "syncedAt": "2026-09-29T11:28:11.784Z"
     },
     {
       "id": "23655050",
@@ -2353,7 +2465,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4750925418?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:27.337Z"
+      "syncedAt": "2026-09-29T11:28:12.149Z"
     },
     {
       "id": "53939298",
@@ -2369,7 +2481,7 @@
       "pageCount": null,
       "categories": [],
       "goodreadsUrl": "https://www.goodreads.com/review/show/4756369635?utm_medium=api&utm_source=rss",
-      "syncedAt": "2026-07-21T23:58:26.536Z"
+      "syncedAt": "2026-09-29T11:28:11.460Z"
     }
   ]
 }
